@@ -1,0 +1,47 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "backupManagementType": {
+      "type": "string",
+      "allowedValues": [
+        "AzureIaasVM",
+        "AzureSql",
+        "MAB"
+      ],
+      "metadata": {
+        "description": "This property is used as the discriminator for deciding the specific types in the polymorhpic chain of types."
+      }
+    },
+    "retentionPolicy": {
+      "type": "object",
+      "metadata": {
+        "description": "The retention policy with the details on backup copy retention ranges."
+      }
+    },
+    "schedulePolicy": {
+      "type": "object",
+      "metadata": {
+        "description": "The backup schedule specified as part of backup policy."
+      }
+    }
+  },
+  "variables": {
+    "comment": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#azureiaasvmprotectionpolicy"
+    },
+    "protectionPolicy": {
+      "backupManagementType": "[parameters('backupManagementType')]",
+      "retentionPolicy": "[parameters('retentionPolicy')]",
+      "schedulePolicy": "[parameters('schedulePolicy')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "protectionPolicy": {
+      "type": "object",
+      "value": "[variables('protectionPolicy')]"
+    }
+  }
+}
