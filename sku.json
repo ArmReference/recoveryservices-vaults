@@ -1,0 +1,44 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "defaultValue": "RS0",
+      "allowedValues": [
+        "RS0"
+      ],
+      "metadata": {
+        "description": "The sku name."
+      }
+    },
+    "tier": {
+      "type": "string",
+      "defaultValue": "Standard",
+      "allowedValues": [
+        "Standard"
+      ],
+      "metadata": {
+        "description": "The sku tier."
+      }
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/recoveryservices/vaults/createorupdate#sku",
+      "schema": "https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2016-06-01/Microsoft.RecoveryServices.json"
+    },
+    "sku": {
+      "name": "[parameters('name')]",
+      "tier": "[parameters('tier')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "sku": {
+      "type": "object",
+      "value": "[variables('sku')]"
+    }
+  }
+}

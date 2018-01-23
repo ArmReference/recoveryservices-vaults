@@ -1,0 +1,54 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the recovery services vault."
+      }
+    },
+    "sku": {
+      "type": "object",
+      "metadata": {
+        "description": "Identifies the unique system identifier for each Azure resource."
+      }
+    },
+    "tags": {
+      "type": "object",
+      "metadata": {
+        "description": "Resource tags."
+      }
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/recoveryservices/vaults/createorupdate",
+      "schema": "https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2016-06-01/Microsoft.RecoveryServices.json"
+    },
+    "vaults": {
+      "type": "Microsoft.RecoveryServices/vaults",
+      "apiVersion": "2016-06-01",
+      "name": "[parameters('name')]",
+      "location": "[resourceGroup().location]",
+      "sku": "[parameters('sku')]",
+      "properties": {}
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.RecoveryServices/vaults",
+      "apiVersion": "2016-06-01",
+      "name": "[parameters('name')]",
+      "location": "[resourceGroup().location]",
+      "sku": "[parameters('sku')]",
+      "properties": {}
+    }
+  ],
+  "outputs": {
+    "vaults": {
+      "type": "object",
+      "value": "[variables('vaults')]"
+    }
+  }
+}
