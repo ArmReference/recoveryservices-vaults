@@ -1,0 +1,42 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "count": {
+      "type": "int",
+      "metadata": {
+        "description": "Count of the duration types. Retention duration is determined by the combining the Count times and durationType. For example, if Count = 3 and durationType = Weeks, then the retention duration is three weeks."
+      }
+    },
+    "durationType": {
+      "type": "string",
+      "allowedValues": [
+        "Days",
+        "Invalid",
+        "Months",
+        "Weeks",
+        "Years"
+      ],
+      "metadata": {
+        "description": "The retention duration type of the retention policy."
+      }
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#retentionduration"
+    },
+    "retentionDuration": {
+      "count": "[parameters('count')]",
+      "durationType": "[parameters('durationType')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "retentionDuration": {
+      "type": "object",
+      "value": "[variables('retentionDuration')]"
+    }
+  }
+}
