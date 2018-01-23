@@ -32,7 +32,8 @@
       "name": "[parameters('name')]",
       "location": "[resourceGroup().location]",
       "sku": "[parameters('sku')]",
-      "properties": {}
+      "properties": {},
+      "tags": "[parameters('tags')]"
     }
   },
   "resources": [
@@ -42,7 +43,8 @@
       "name": "[parameters('name')]",
       "location": "[resourceGroup().location]",
       "sku": "[parameters('sku')]",
-      "properties": {}
+      "properties": {},
+      "tags": "[parameters('tags')]"
     }
   ],
   "outputs": {
