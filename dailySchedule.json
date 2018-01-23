@@ -1,0 +1,35 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "retentionDuration": {
+      "type": "object",
+      "metadata": {
+        "description": "Retention duration of the retention policy."
+      }
+    },
+    "retentionTimes": {
+      "type": "array",
+      "metadata": {
+        "description": "Times in day when backup should be triggered. e.g. 01:00, 13:00."
+      }
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#dailyretentionschedule"
+    },
+    "dailySchedule": {
+      "retentionTimes": "[parameters('retentionTimes')]",
+      "retentionDuration": "[parameters('retentionDuration')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "dailySchedule": {
+      "type": "object",
+      "value": "[variables('dailySchedule')]"
+    }
+  }
+}
