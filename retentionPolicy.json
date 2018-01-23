@@ -1,0 +1,76 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "dailySchedule": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Daily retention schedule of the backup policy."
+      }
+    },
+    "monthlySchedule": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Monthly retention schedule of the backup policy."
+      }
+    },
+    "retentionPolicyType": {
+      "type": "string",
+      "allowedValues": [
+        "LongTermRetentionPolicy",
+        "SimpleRetentionPolicy"
+      ],
+      "metadata": {
+        "description": "This property is used as the discriminator for deciding the specific types in the polymorhpic chain of types."
+      }
+    },
+    "retentionDuration": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Retention duration of the protection policy."
+      }
+    },
+    "weeklySchedule": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Weekly retention schedule of the backup policy."
+      }
+    },
+    "yearlySchedule": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Yearly retention schedule of the backup policy."
+      }
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#longtermretentionpolicy"
+    },
+    "LongTermRetentionPolicy": {
+      "dailySchedule": "[parameters('dailySchedule')]",
+      "monthlySchedule": "[parameters('monthlySchedule')]",
+      "retentionPolicyType": "[parameters('retentionPolicyType')]",
+      "weeklySchedule": "[parameters('weeklySchedule')]",
+      "yearlySchedule": "[parameters('yearlySchedule')]"
+    },
+    "SimpleRetentionPolicy": {
+      "retentionPolicyType": "[parameters('retentionPolicyType')]",
+      "retentionDuration": "[parameters('retentionDuration')]"
+    },
+    "retentionPolicy": "[if(equals(parameters('retentionPolicyType'),'LongTermRetentionPolicy'),variables('LongTermRetentionPolicy'),variables('SimpleRetentionPolicy'))]"
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "retentionPolicy": {
+      "type": "object",
+      "value": "[variables('retentionPolicy')]"
+    }
+  }
+}
