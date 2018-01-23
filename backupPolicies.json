@@ -1,0 +1,53 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource name associated with the resource."
+      }
+    },
+    "properties": {
+      "type": "object",
+      "metadata": {
+        "description": "Workload-specific backup policies; AzureIaaSVMProtectionPolicy, MabProtectionPolicy, AzureSqlProtectionPolicy"
+      }
+    },
+    "tags": {
+      "type": "object",
+      "metadata": {
+        "description": "Resource tags."
+      }
+    }
+  },
+  "variables": {
+    "comment": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate"
+    },
+    "backupPolicies": {
+      "name": "[parameters('name')]",
+      "apiVersion": "2016-06-01",
+      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "location": "[resourceGroup().location]",
+      "properties": "[parameters('properties')]",
+      "tags": "[parameters('tags')]"
+    }
+  },
+  "resources": [
+    {
+      "name": "[parameters('name')]",
+      "apiVersion": "2016-06-01",
+      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "location": "[resourceGroup().location]",
+      "properties": "[parameters('properties')]",
+      "tags": "[parameters('tags')]"
+    }
+  ],
+  "outputs": {
+    "backupPolicies": {
+      "type": "object",
+      "value": "[variables('backupPolicies')]"
+    }
+  }
+}
