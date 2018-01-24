@@ -2,6 +2,12 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "2017.09.01.0",
   "parameters": {
+    "name": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource name associated with the resource."
+      }
+    },
     "backupManagementType": {
       "type": "string",
       "allowedValues": [
@@ -24,6 +30,15 @@
       "metadata": {
         "description": "The backup schedule specified as part of backup policy."
       }
+    },
+    "tags": {
+      "type": "object",
+      "metadata": {
+        "description": "Resource tags."
+      }
+    },
+    "recoveryServicesName": {
+      "type": "string"
     }
   },
   "variables": {
@@ -31,9 +46,16 @@
       "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#azureiaasvmprotectionpolicy"
     },
     "protectionPolicy": {
-      "backupManagementType": "[parameters('backupManagementType')]",
-      "retentionPolicy": "[parameters('retentionPolicy')]",
-      "schedulePolicy": "[parameters('schedulePolicy')]"
+      "apiVersion": "2015-11-10",
+      "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
+      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "dependsOn": [],
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "backupManagementType": "[parameters('backupManagementType')]",
+        "retentionPolicy": "[parameters('retentionPolicy')]",
+        "schedulePolicy": "[parameters('schedulePolicy')]"
+      }
     }
   },
   "resources": [
