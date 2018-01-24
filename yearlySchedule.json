@@ -1,0 +1,67 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "monthsOfYear": {
+      "type": "array"
+    },
+    "retentionDuration": {
+      "type": "object",
+      "metadata": {
+        "description": "Retention duration of the retention policy."
+      }
+    },
+    "retentionScheduleDaily": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Daily retention format for the monthly retention policy."
+      }
+    },
+    "retentionScheduleFormatType": {
+      "type": "string",
+      "allowedValues": [
+        "Daily",
+        "Invalid",
+        "Weekly"
+      ],
+      "metadata": {
+        "description": "Retention schedule format type for monthly retention policy."
+      }
+    },
+    "retentionScheduleWeekly": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Weekly retention format for the monthly retention policy."
+      }
+    },
+    "retentionTimes": {
+      "type": "array",
+      "metadata": {
+        "description": "Times in day when backup should be triggered. e.g. 01:00, 13:00."
+      }
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#yearlyretentionschedule"
+    },
+    "yearlySchedule": {
+      "monthsOfYear": "[parameters('monthsOfYear')]",
+      "retentionDuration": "[parameters('retentionDuration')]",
+      "retentionScheduleDaily": "[parameters('retentionScheduleDaily')]",
+      "retentionScheduleFormatType": "[parameters('retentionScheduleFormatType')]",
+      "retentionScheduleWeekly": "[parameters('retentionScheduleWeekly')]",
+      "retentionTimes": "[parameters('retentionTimes')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "yearlySchedule": {
+      "type": "object",
+      "value": "[variables('yearlySchedule')]"
+    }
+  }
+}
