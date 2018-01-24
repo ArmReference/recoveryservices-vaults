@@ -10,7 +10,8 @@
       ]
     },
     "scheduleRunDays": {
-      "type": "array"
+      "type": "array",
+      "defaultValue": []
     },
     "scheduleRunFrequency": {
       "type": "string",
@@ -24,7 +25,8 @@
       }
     },
     "scheduleRunTimes": {
-      "type": "array"
+      "type": "array",
+      "defaultValue": []
     },
     "scheduleWeeklyFrequency": {
       "type": "int",
