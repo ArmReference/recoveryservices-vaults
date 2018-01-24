@@ -37,6 +37,9 @@
         "description": "Resource tags."
       }
     },
+    "timeZone": {
+      "type": "string"
+    },
     "recoveryServicesName": {
       "type": "string"
     }
@@ -54,7 +57,8 @@
       "properties": {
         "backupManagementType": "[parameters('backupManagementType')]",
         "retentionPolicy": "[parameters('retentionPolicy')]",
-        "schedulePolicy": "[parameters('schedulePolicy')]"
+        "schedulePolicy": "[parameters('schedulePolicy')]",
+        "timeZone": "[parameters('timeZone')]"
       }
     }
   },
