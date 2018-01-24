@@ -10,6 +10,7 @@
     },
     "retentionScheduleDaily": {
       "type": "object",
+      "defaultValue": {},
       "metadata": {
         "description": "Daily retention format for the monthly retention policy."
       }
@@ -27,6 +28,7 @@
     },
     "retentionScheduleWeekly": {
       "type": "object",
+      "defaultValue": {},
       "metadata": {
         "description": "Weekly retention format for the monthly retention policy."
       }
