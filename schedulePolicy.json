@@ -37,13 +37,17 @@
     "comments": {
       "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#simpleschedulepolicy"
     },
-    "schedulePolicy": {
+    "LongTermSchedulePolicy": {
+      "schedulePolicyType": "[parameters('schedulePolicyType')]"
+    },
+    "SimpleSchedulePolicy": {
       "schedulePolicyType": "[parameters('schedulePolicyType')]",
       "scheduleRunDays": "[parameters('scheduleRunDays')]",
       "scheduleRunFrequency": "[parameters('scheduleRunFrequency')]",
       "scheduleRunTimes": "[parameters('scheduleRunTimes')]",
       "scheduleWeeklyFrequency": "[parameters('scheduleWeeklyFrequency')]"
-    }
+    },
+    "schedulePolicy": "[if(equals(parameters('schedulePolicyType'),'LongTermSchedulePolicy'),variables('LongTermSchedulePolicy'),variables('SimpleSchedulePolicy'))]"
   },
   "resources": [
   ],
