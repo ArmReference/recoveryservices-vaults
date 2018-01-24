@@ -1,0 +1,36 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "date": {
+      "type": "int",
+      "metadata": {
+        "description": ""
+      }
+    },
+    "isLast": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": ""
+      }
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#dailyretentionformat"
+    },
+    "daysOfTheMonth": {
+      "date": "[parameters('date')]",
+      "isLast": "[parameters('isLast')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "daysOfTheMonth": {
+      "type": "object",
+      "value": "[variables('daysOfTheMonth')]"
+    }
+  }
+}
