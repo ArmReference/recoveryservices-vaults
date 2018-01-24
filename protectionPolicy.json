@@ -63,6 +63,19 @@
     }
   },
   "resources": [
+    {
+      "apiVersion": "2015-11-10",
+      "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
+      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "dependsOn": [],
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "backupManagementType": "[parameters('backupManagementType')]",
+        "retentionPolicy": "[parameters('retentionPolicy')]",
+        "schedulePolicy": "[parameters('schedulePolicy')]",
+        "timeZone": "[parameters('timeZone')]"
+      }
+    }
   ],
   "outputs": {
     "protectionPolicy": {
