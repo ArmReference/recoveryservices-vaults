@@ -1,0 +1,36 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "daysOfTheWeek": {
+      "type": "array"
+    },
+    "retentionDuration": {
+      "type": "object",
+      "metadata": {
+        "description": "Retention duration of retention policy."
+      }
+    },
+    "retentionTimes": {
+      "type": "array"
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#weeklyretentionschedule"
+    },
+    "weeklySchedule": {
+      "daysOfTheWeek": "[parameters('daysOfTheWeek')]",
+      "retentionDuration": "[parameters('retentionDuration')]",
+      "retentionTimes": "[parameters('retentionTimes')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "weeklySchedule": {
+      "type": "object",
+      "value": "[variables('weeklySchedule')]"
+    }
+  }
+}
