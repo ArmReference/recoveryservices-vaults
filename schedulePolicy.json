@@ -1,0 +1,56 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "schedulePolicyType": {
+      "type": "string",
+      "allowedValues": [
+        "SimpleSchedulePolicy",
+        "LongTermSchedulePolicy"
+      ]
+    },
+    "scheduleRunDays": {
+      "type": "array"
+    },
+    "scheduleRunFrequency": {
+      "type": "string",
+      "allowedValues": [
+        "Daily",
+        "Invalid",
+        "Weekly"
+      ],
+      "metadata": {
+        "description": "Defines the frequency interval (daily or weekly) for the schedule policy."
+      }
+    },
+    "scheduleRunTimes": {
+      "type": "array"
+    },
+    "scheduleWeeklyFrequency": {
+      "type": "int",
+      "metadata": {
+        "description": "The number of times per week the schedule runs."
+      }
+    }
+  },
+  "variables": {
+    "comments": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#simpleschedulepolicy"
+    },
+    "schedulePolicy": {
+      "schedulePolicyType": "[parameters('schedulePolicyType')]",
+      "scheduleRunDays": "[parameters('scheduleRunDays')]",
+      "scheduleRunFrequency": "[parameters('scheduleRunFrequency')]",
+      "scheduleRunTimes": "[parameters('scheduleRunTimes')]",
+      "scheduleWeeklyFrequency": "[parameters('scheduleWeeklyFrequency')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "schedulePolicy": {
+      "type": "object",
+      "value": "[variables('schedulePolicy')]"
+    }
+  }
+}
