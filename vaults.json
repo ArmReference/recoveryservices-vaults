@@ -19,6 +19,13 @@
       "metadata": {
         "description": "Resource tags."
       }
+    },
+    "DependsOn": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Pass dependencies"
+      }
     }
   },
   "variables": {
@@ -31,6 +38,7 @@
       "apiVersion": "2016-06-01",
       "name": "[parameters('name')]",
       "location": "[resourceGroup().location]",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "sku": "[parameters('sku')]",
       "properties": {},
       "tags": "[parameters('tags')]"
@@ -42,6 +50,7 @@
       "apiVersion": "2016-06-01",
       "name": "[parameters('name')]",
       "location": "[resourceGroup().location]",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "sku": "[parameters('sku')]",
       "properties": {},
       "tags": "[parameters('tags')]"

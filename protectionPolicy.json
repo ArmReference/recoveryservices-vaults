@@ -42,6 +42,13 @@
     },
     "recoveryServicesName": {
       "type": "string"
+    },
+    "DependsOn": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Pass dependencies"
+      }
     }
   },
   "variables": {
@@ -52,7 +59,7 @@
       "apiVersion": "2015-11-10",
       "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
       "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
-      "dependsOn": [],
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "location": "[resourceGroup().location]",
       "properties": {
         "backupManagementType": "[parameters('backupManagementType')]",
@@ -67,7 +74,7 @@
       "apiVersion": "2015-11-10",
       "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
       "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
-      "dependsOn": [],
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "location": "[resourceGroup().location]",
       "properties": {
         "backupManagementType": "[parameters('backupManagementType')]",

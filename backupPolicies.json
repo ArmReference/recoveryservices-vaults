@@ -19,6 +19,13 @@
       "metadata": {
         "description": "Resource tags."
       }
+    },
+    "DependsOn": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Pass dependencies"
+      }
     }
   },
   "variables": {
@@ -30,6 +37,7 @@
       "apiVersion": "2016-06-01",
       "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
       "location": "[resourceGroup().location]",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "properties": "[parameters('properties')]",
       "tags": "[parameters('tags')]"
     }
@@ -40,6 +48,7 @@
       "apiVersion": "2016-06-01",
       "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
       "location": "[resourceGroup().location]",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "properties": "[parameters('properties')]",
       "tags": "[parameters('tags')]"
     }
