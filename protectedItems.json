@@ -81,21 +81,20 @@
       "definition": "https://docs.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults/backupfabrics/protectioncontainers/protecteditems"
     },
     "protectedItems": {
-      {
-        "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
-        "name": "[concat(parameters('vaultName'), '/', parameters('fabricName'), '/',parameters('protectionContainers')[copyIndex()], '/', parameters('protectedItems')[copyIndex()])]",
-        "apiVersion": "2016-06-01",
-        "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
-        "properties": {
-          "protectedItemType": "[parameters('protectedItemType')]",
-          "policyId": "[parameters('policyId')]",
-          "sourceResourceId": "[parameters('sourceResourceId')]"
-        }
+
+      "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
+      "name": "[concat(parameters('vaultName'), '/', parameters('fabricName'), '/',parameters('protectionContainers')[copyIndex()], '/', parameters('protectedItems')[copyIndex()])]",
+      "apiVersion": "2016-06-01",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
+      "properties": {
+        "protectedItemType": "[parameters('protectedItemType')]",
+        "policyId": "[parameters('policyId')]",
+        "sourceResourceId": "[parameters('sourceResourceId')]"
+
       }
     }
   },
-  "resources": [
-  ],
+  "resources": [],
   "outputs": {
     "protectedItems": {
       "type": "object",
