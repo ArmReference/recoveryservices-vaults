@@ -42,17 +42,7 @@
       "tags": "[parameters('tags')]"
     }
   },
-  "resources": [
-    {
-      "name": "[parameters('name')]",
-      "apiVersion": "2016-06-01",
-      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
-      "location": "[resourceGroup().location]",
-      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
-      "properties": "[parameters('properties')]",
-      "tags": "[parameters('tags')]"
-    }
-  ],
+  "resources": [ ],
   "outputs": {
     "backupPolicies": {
       "type": "object",
