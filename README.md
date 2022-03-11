@@ -1,3 +1,4 @@
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2Frecoveryservices-vaults%2F%2Fazuredeploy.json)
 # Create Recovery Services Vault
 
 This template creates an Recovery Services Vault in Azure
@@ -8,34 +9,34 @@ This is a reference template built fromt the API for this resource.
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-StorageAccountName | Yes      | The name of the Azure Storage Account where the templates are stored
-ContainerName  | Yes      | The Container inside the Storage Account
-SasToken       | Yes      | The Shared Access Signature for the Storage Account
+StorageAccountName | Yes      | The name of the Azure Storage Account where the templates are stored.
+ContainerName  | Yes      | The Container inside the Storage Account.
+SasToken       | Yes      | The Shared Access Signature for the Storage Account.
 
 ### StorageAccountName
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The name of the Azure Storage Account where the templates are stored
+The name of the Azure Storage Account where the templates are stored.
 
 ### ContainerName
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The Container inside the Storage Account
+The Container inside the Storage Account.
 
 ### SasToken
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The Shared Access Signature for the Storage Account
+The Shared Access Signature for the Storage Account.
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-vault | object | The Vault Template
-protectionPolicy | object | The Protection Policy
+vault | object | The Vault Template.
+protectionPolicy | object | The Protection Policy.
 
 ## Snippets
 
