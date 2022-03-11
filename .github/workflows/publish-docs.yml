@@ -14,7 +14,7 @@ jobs:
         Install-Module -Name 'PSDocs.Azure' -Repository PSGallery -force;
         Get-AzDocTemplateFile | ForEach-Object {
           $TemplateFile = Get-Item -Path $_.TemplateFile;
-          $Template = Get-Content $TemplateFile |ConvertFromt-Json;
+          $Template = Get-Content $TemplateFile |ConvertFrom-Json;
           $ContentVersion = $Template.ContentVersion;
           export CONTAINER=$ContentVersion
           Invoke-PSDocument -Module PSDocs.Azure -OutputPath "out/docs" -InputObject $TemplateFile.FullName -InstanceName $TemplateFile.BaseName;
