@@ -29,6 +29,7 @@ jobs:
         git config user.email "<>";
     - name: Update ReadME
       run:
+        ls
         #git add *;
         #git commit -m "Updating README with latest documentation";
         #git push origin main
