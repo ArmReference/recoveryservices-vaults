@@ -1,8 +1,8 @@
 {
  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
- "contentVersion": "1.0.0.2",
+ "contentVersion": "1.0.0.3",
  "metadata": {
-  "description": "This is a reference template built fromt the API for this resource."
+  "description": "These templates are not meant for deployment, they simply build reference templates that could then be deployed."
  },
  "parameters": {
   "StorageAccountName": {
@@ -40,7 +40,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/sku.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "name": {
@@ -63,7 +63,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/vaults.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "name": {
@@ -87,7 +87,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/retentionDuration.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "count": {
@@ -110,7 +110,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/dailySchedule.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "retentionDuration": {
@@ -131,7 +131,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/retentionDuration.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "count": {
@@ -154,7 +154,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/weeklySchedule.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "daysOfTheWeek": {
@@ -178,7 +178,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/retentionDuration.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "count": {
@@ -199,7 +199,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/retentionScheduleWeekly.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "daysOfTheWeek": {
@@ -223,7 +223,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/monthlySchedule.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "retentionDuration": {
@@ -253,7 +253,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/retentionDuration.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "count": {
@@ -276,7 +276,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/yearlySchedule.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "monthsOfYear": {
@@ -314,7 +314,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/retentionPolicy.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "dailySchedule": {
@@ -347,7 +347,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/schedulePolicy.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "schedulePolicyType": {
@@ -382,7 +382,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/protectionPolicy.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.2"
+     "contentVersion": "1.0.0.3"
     },
     "parameters": {
      "name": {
@@ -415,7 +415,7 @@
    "type": "object",
    "value": {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.2",
+    "contentVersion": "1.0.0.3",
     "parameters": {},
     "variables": {},
     "resources": [
