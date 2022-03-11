@@ -32,10 +32,9 @@ jobs:
         git add *;
         git commit -m "Updating README with latest documentation";
         git push origin main
-    - name: Send to Storage Account
-      uses: bacongobbler/azure-blob-storage-upload@main
+    - name: Send to Azure Storage Account
+      uses: azure/CLI@v1
       with:
-        source_dir: reference
-        container_name: (echo $CONTAINER)
-        extra_args: '--destination-path Microsoft.RecoveryServices/reference'
-        connection_string: ${{ secrets.ConnectionString }}
+        azcliversion: 2.34.1
+        inlinescript: |
+          az storage blob upload-batch --source reference --destination ($env:CONTAINER) --Connection-String ${{ secrets.ConnectionString }} --destination-path Microsoft.RecoveryServices/reference
