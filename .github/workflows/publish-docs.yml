@@ -17,7 +17,7 @@ jobs:
           $TemplateFile = Get-Item -Path $_.TemplateFile;
           if ($TemplateFile.BaseName -eq 'azuredeploy') {
             $RepoName = $TemplateFile.Directory.Parent.Name;
-            $ReadmeHeader = "[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMultiCloudDeployment%2F$($RepoName)%2F$($Version)%2Fazuredeploy.json)"
+            $ReadmeHeader = "[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2F$($RepoName)%2F$($Version)%2Fazuredeploy.json)"
           }
           $Template = Get-Content $TemplateFile |ConvertFrom-Json;
           $Version = $Template.ContentVersion;
@@ -26,8 +26,8 @@ jobs:
         };
         New-Item docs -ItemType Directory -Force;
         $Readme = Get-Content "out/docs/azuredeploy.md";
-        Write-Output $ReadmeHeader |Out-File "out/docs/README.md" -Force;
-        Write-Output $Readme |Out-File "out/docs/README.md" -Append;
+        Write-Output $ReadmeHeader |Out-File "README.md" -Force;
+        Write-Output $Readme |Out-File "README.md" -Append;
         Remove-Item "out/docs/azuredeploy.md"
         Move-Item "out/docs/*.md" docs/ -Force;
         echo "::set-output name=CONTAINER::$($ContentVersion)"
