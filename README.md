@@ -1,9 +1,9 @@
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2Frecoveryservices-vaults%2F1.0.0.2%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2Frecoveryservices-vaults%2F1.0.0.3%2Fazuredeploy.json)
 # Create Recovery Services Vault
 
 This template creates an Recovery Services Vault in Azure
 
-This is a reference template built fromt the API for this resource.
+These templates are not meant for deployment, they simply build reference templates that could then be deployed.
 
 ## Parameters
 
@@ -35,8 +35,7 @@ The Shared Access Signature for the Storage Account.
 
 Name | Type | Description
 ---- | ---- | -----------
-vault | object | The Vault Template.
-protectionPolicy | object | The Protection Policy.
+armTemplate | object | Fully populated template
 
 ## Snippets
 
