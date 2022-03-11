@@ -1,4 +1,4 @@
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2Frecoveryservices-vaults%2F1.0.0.1%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2Frecoveryservices-vaults%2F1.0.0.2%2Fazuredeploy.json)
 # Create Recovery Services Vault
 
 This template creates an Recovery Services Vault in Azure
