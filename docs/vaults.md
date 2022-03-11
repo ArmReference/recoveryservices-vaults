@@ -46,7 +46,7 @@ vaults | object |
 ```json
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
+    "contentVersion": "1.0.0.1",
     "metadata": {
         "template": "reference/vaults.json"
     },

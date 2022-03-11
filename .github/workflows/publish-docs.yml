@@ -17,10 +17,10 @@ jobs:
           $TemplateFile = Get-Item -Path $_.TemplateFile;
           if ($TemplateFile.BaseName -eq 'azuredeploy') {
             $RepoName = $TemplateFile.Directory.Parent.Name;
+            $Version = $Template.ContentVersion;
             $ReadmeHeader = "[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2F$($RepoName)%2F$($Version)%2Fazuredeploy.json)"
           }
           $Template = Get-Content $TemplateFile |ConvertFrom-Json;
-          $Version = $Template.ContentVersion;
           $ContentVersion = (Get-Date).GetDateTimeFormats()[1];
           Invoke-PSDocument -Module PSDocs.Azure -OutputPath "out/docs" -InputObject $TemplateFile.FullName -InstanceName $TemplateFile.BaseName;
         };
