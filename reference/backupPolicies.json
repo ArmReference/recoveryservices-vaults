@@ -59,16 +59,6 @@
     }
   },
   "resources": [
-    {
-      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
-      "apiVersion": "2021-12-01",
-      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
-      "name": "[parameters('name')]",
-      "location": "[parameters('location')]",
-      "tags": "[parameters('tags')]",
-      "eTag": "[parameters('eTag')]",
-      "properties": "[parameters('properties')]"
-    }
   ],
   "outputs": {
     "backupPolicies": {
