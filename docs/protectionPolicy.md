@@ -25,7 +25,7 @@ Resource name associated with the resource.
 
 This property is used as the discriminator for deciding the specific types in the polymorhpic chain of types.
 
-- Allowed values: `AzureIaasVM`, `AzureSql`, `MAB`
+- Allowed values: `AzureIaasVM`, `AzureSql`, `AzureStorage`, `AzureWorkload`, `GenericProtectionPolicy`, `MAB`
 
 ### retentionPolicy
 
