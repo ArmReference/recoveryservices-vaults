@@ -1,23 +1,38 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "2017.09.01.0",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
       "type": "string",
+      "minLength": 3,
+      "maxLength": 150,
       "metadata": {
         "description": "Resource name associated with the resource."
       }
     },
-    "properties": {
-      "type": "object",
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
       "metadata": {
-        "description": "Workload-specific backup policies; AzureIaaSVMProtectionPolicy, MabProtectionPolicy, AzureSqlProtectionPolicy"
+        "description": "Resource location."
       }
     },
     "tags": {
       "type": "object",
       "metadata": {
         "description": "Resource tags."
+      }
+    },
+    "eTag": {
+      "type": "string",
+      "metadata": {
+        "description": "Optional ETag."
+      }
+    },
+    "properties": {
+      "type": "object",
+      "metadata": {
+        "description": "Base class for backup policy. Workload-specific backup policies are derived from this class."
       }
     },
     "DependsOn": {
@@ -30,27 +45,29 @@
   },
   "variables": {
     "comment": {
-      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate"
+      "definition": "https://docs.microsoft.com/en-us/rest/api/backup/protection-policies/create-or-update"
     },
     "backupPolicies": {
-      "name": "[parameters('name')]",
-      "apiVersion": "2016-06-01",
       "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
-      "location": "[resourceGroup().location]",
+      "apiVersion": "2021-12-01",
       "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
-      "properties": "[parameters('properties')]",
-      "tags": "[parameters('tags')]"
+      "name": "[parameters('name')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
+      "eTag": "[parameters('eTag')]",
+      "properties": "[parameters('properties')]"
     }
   },
   "resources": [
     {
-      "name": "[parameters('name')]",
-      "apiVersion": "2016-06-01",
       "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
-      "location": "[resourceGroup().location]",
+      "apiVersion": "2021-12-01",
       "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
-      "properties": "[parameters('properties')]",
-      "tags": "[parameters('tags')]"
+      "name": "[parameters('name')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
+      "eTag": "[parameters('eTag')]",
+      "properties": "[parameters('properties')]"
     }
   ],
   "outputs": {

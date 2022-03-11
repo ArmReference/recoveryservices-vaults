@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "2017.09.01.0",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
       "type": "string",
@@ -13,6 +13,9 @@
       "allowedValues": [
         "AzureIaasVM",
         "AzureSql",
+        "AzureStorage",
+        "AzureWorkload",
+        "GenericProtectionPolicy",
         "MAB"
       ],
       "metadata": {
@@ -55,12 +58,31 @@
     "comment": {
       "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#azureiaasvmprotectionpolicy"
     },
+    "properties": [
+      {
+        "backupManagementType": "AzureIaasVM",
+        "instantRPDetails": {
+          "azureBackupRGNamePrefix": "string",
+          "azureBackupRGNameSuffix": "string"
+        },
+        "instantRpRetentionRangeInDays": "int",
+        "policyType": "string",
+        "retentionPolicy": {
+          "retentionPolicyType": "string"
+        },
+        "schedulePolicy": {
+          "schedulePolicyType": "string"
+        },
+        "timeZone": "string"
+      }
+    ],
     "protectionPolicy": {
-      "apiVersion": "2015-11-10",
-      "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
       "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "apiVersion": "2021-12-01",
       "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
+      "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
       "location": "[resourceGroup().location]",
+      "tags": "[parameters('tags')]",
       "properties": {
         "backupManagementType": "[parameters('backupManagementType')]",
         "retentionPolicy": "[parameters('retentionPolicy')]",
@@ -71,11 +93,12 @@
   },
   "resources": [
     {
-      "apiVersion": "2015-11-10",
-      "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
       "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "apiVersion": "2021-12-01",
       "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
+      "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
       "location": "[resourceGroup().location]",
+      "tags": "[parameters('tags')]",
       "properties": {
         "backupManagementType": "[parameters('backupManagementType')]",
         "retentionPolicy": "[parameters('retentionPolicy')]",
