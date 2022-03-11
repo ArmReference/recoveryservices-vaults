@@ -33,8 +33,8 @@ jobs:
         git commit -m "Updating README with latest documentation";
         git push origin main
     - name: Send to Storage Account
-      - uses: bacongobbler/azure-blob-storage-upload@main
-        with:
-          source_dir: reference
-          container_name: (echo $CONTAINER)
-          connection_string: ${{ secrets.ConnectionString }}
+    - uses: bacongobbler/azure-blob-storage-upload@main
+      with:
+        source_dir: reference
+        container_name: (echo $CONTAINER)
+        connection_string: ${{ secrets.ConnectionString }}
