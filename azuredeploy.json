@@ -2,7 +2,7 @@
  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
  "contentVersion": "1.0.0.0",
  "metadata": {
-  "description": "This template is a reference built on the API for this resource."
+  "description": "This is a reference template built fromt the API for this resource."
  },
  "parameters": {
   "StorageAccountName": {
