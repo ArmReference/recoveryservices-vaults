@@ -5,8 +5,10 @@
 Parameter name | Required | Description
 -------------- | -------- | -----------
 name           | Yes      | Resource name associated with the resource.
-properties     | Yes      | Workload-specific backup policies; AzureIaaSVMProtectionPolicy, MabProtectionPolicy, AzureSqlProtectionPolicy
+location       | No       | Resource location.
 tags           | Yes      | Resource tags.
+eTag           | Yes      | Optional ETag.
+properties     | Yes      | Base class for backup policy. Workload-specific backup policies are derived from this class.
 DependsOn      | No       | Pass dependencies
 
 ### name
@@ -15,17 +17,31 @@ DependsOn      | No       | Pass dependencies
 
 Resource name associated with the resource.
 
-### properties
+### location
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-Workload-specific backup policies; AzureIaaSVMProtectionPolicy, MabProtectionPolicy, AzureSqlProtectionPolicy
+Resource location.
+
+- Default value: `[resourceGroup().location]`
 
 ### tags
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
 Resource tags.
+
+### eTag
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+Optional ETag.
+
+### properties
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+Base class for backup policy. Workload-specific backup policies are derived from this class.
 
 ### DependsOn
 
@@ -54,10 +70,16 @@ backupPolicies | object |
         "name": {
             "value": ""
         },
-        "properties": {
-            "value": {}
+        "location": {
+            "value": "[resourceGroup().location]"
         },
         "tags": {
+            "value": {}
+        },
+        "eTag": {
+            "value": ""
+        },
+        "properties": {
             "value": {}
         },
         "DependsOn": {
