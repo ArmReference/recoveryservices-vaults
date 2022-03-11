@@ -1,0 +1,40 @@
+name: Generate ARM templates docs
+on:
+  push:
+    branches: [ main ]
+jobs:
+  arm_docs:
+    name: Generate ARM template docs
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Generate Builder Documentation
+      run: |
+        Install-Module -Name 'PSDocs.Azure' -Repository PSGallery -force;
+        Get-AzDocTemplateFile | ForEach-Object {
+          $TemplateFile = Get-Item -Path $_.TemplateFile;
+          $docName = "README";
+          Invoke-PSDocument -Module PSDocs.Azure -OutputPath "out/docs" -InputObject $TemplateFile.FullName -InstanceName $docName;
+        };
+        Move-Item "out/docs/$($docName).md" . -Force
+      shell: pwsh
+    - name: Generate Reference Documentation
+      run: |
+        Install-Module -Name 'PSDocs.Azure' -Repository PSGallery -force;
+        Get-AzDocTemplateFile | ForEach-Object {
+          $TemplateFile = Get-Item -Path $_.TemplateFile;
+          Invoke-PSDocument -Module PSDocs.Azure -OutputPath "out/docs" -InputObject $TemplateFile.FullName -InstanceName $TemplateFile.BaseName;
+        };
+        New-Item docs -ItemType Directory -Force
+        Move-Item "out/docs/*.md" docs/ -Force
+      shell: pwsh
+    - name: Setup Git Config
+      run:
+        git config user.name "GitHub Action";
+        git config user.email "<>";
+    - name: Update ReadME
+      run:
+        git add *;
+        git commit -m "Updating README with latest documentation";
+        git push origin main
