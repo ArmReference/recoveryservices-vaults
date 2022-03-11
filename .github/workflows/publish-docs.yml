@@ -1,7 +1,7 @@
 name: Generate ARM templates docs
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 jobs:
   arm_docs:
     name: Generate ARM template docs
