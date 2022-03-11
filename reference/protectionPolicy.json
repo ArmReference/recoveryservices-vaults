@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.1",
+  "contentVersion": "1.0.0.2",
   "parameters": {
     "name": {
       "type": "string",
@@ -92,20 +92,6 @@
     }
   },
   "resources": [
-    {
-      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
-      "apiVersion": "2021-12-01",
-      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
-      "name": "[concat(parameters('recoveryServicesName'), '/', parameters('name'))]",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('tags')]",
-      "properties": {
-        "backupManagementType": "[parameters('backupManagementType')]",
-        "retentionPolicy": "[parameters('retentionPolicy')]",
-        "schedulePolicy": "[parameters('schedulePolicy')]",
-        "timeZone": "[parameters('timeZone')]"
-      }
-    }
   ],
   "outputs": {
     "protectionPolicy": {
