@@ -2,7 +2,7 @@
 
 This template creates an Recovery Services Vault in Azure
 
-This template is a reference built on the API for this resource.
+This is a reference template built fromt the API for this resource.
 
 ## Parameters
 
