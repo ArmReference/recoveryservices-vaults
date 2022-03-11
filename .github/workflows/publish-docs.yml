@@ -10,18 +10,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Generate Reference Documentation
+      id: Container_Name
       run: |
         Install-Module -Name 'PSDocs.Azure' -Repository PSGallery -force;
         Get-AzDocTemplateFile | ForEach-Object {
           $TemplateFile = Get-Item -Path $_.TemplateFile;
           $Template = Get-Content $TemplateFile |ConvertFrom-Json;
           $ContentVersion = $Template.ContentVersion;
-          $env:CONTAINER = $ContentVersion;
           Invoke-PSDocument -Module PSDocs.Azure -OutputPath "out/docs" -InputObject $TemplateFile.FullName -InstanceName $TemplateFile.BaseName;
         };
         New-Item docs -ItemType Directory -Force;
         Move-Item "out/docs/azuredeploy.md" README.md -Force;
         Move-Item "out/docs/*.md" docs/ -Force;
+        echo "::set-output name=CONTAINER::$($ContentVersion)"
       shell: pwsh
     - name: Setup Git Config
       run:
@@ -38,5 +39,4 @@ jobs:
       with:
         azcliversion: 2.34.1
         inlinescript: |
-          echo $CONTAINER
-          az storage blob upload-batch --source reference --destination $env:CONTAINER --Connection-String ${{ secrets.ConnectionString }} --destination-path Microsoft.RecoveryServices/reference
+          az storage blob upload-batch --source reference --destination ${{steps.Container_Name.outputs.CONTAINER}} --Connection-String ${{ secrets.ConnectionString }} --destination-path Microsoft.RecoveryServices/reference
