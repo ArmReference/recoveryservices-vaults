@@ -1,0 +1,94 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "azureBackupRGNamePrefix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Prefix to apply to a ResourceGroup for backups"
+      }
+    },
+    "azureBackupRGNameSuffix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Suffix to apply to a ResourceGroup for backups"
+      }
+    },
+    "instantRpRetentionRangeInDays": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "Instant RP retention policy range in days"
+      }
+    },
+    "policyType": {
+      "type": "string",
+      "defaultValue": "Full",
+      "allowedValues": [
+        "CopyOnlyFull",
+        "Differential",
+        "Full",
+        "Incremental",
+        "Invalid",
+        "Log"
+      ],
+      "metadata": {
+        "description": "Type of backup policy type"
+      }
+    },
+    "retentionPolicyType": {
+      "type": "string",
+      "defaultValue": "SimpleRetentionPolicy",
+      "allowedValues": [
+        "LongTermRetentionPolicy",
+        "SimpleRetentionPolicy"
+      ],
+      "metadata": {
+        "description": "Type of backup policy type"
+      }
+    },
+    "schedulePolicyType": {
+      "type": "string",
+      "defaultValue": "SimpleSchedulePolicy",
+      "allowedValues": [
+        "LogSchedulePolicy",
+        "LongTermSchedulePolicy",
+        "SimpleSchedulePolicy",
+        "SimpleSchedulePolicyV2"
+      ],
+      "metadata": {
+        "description": "Type of backup policy type"
+      }
+    }
+  },
+  "variables": {
+    "comment": {
+      "definition": "https://docs.microsoft.com/en-us/rest/api/backup/protection-policies/create-or-update#azureiaasvmprotectionpolicy"
+    },
+    "protectionPolicy": {
+      "backupManagementType": "AzureIaasVM",
+      "instantRPDetails": {
+        "azureBackupRGNamePrefix": "[parameters('azureBackupRGNamePrefix')]",
+        "azureBackupRGNameSuffix": "[parameters('azureBackupRGNameSuffix')]"
+      },
+      "instantRpRetentionRangeInDays": "[parameters('instantRpRetentionRangeInDays')]",
+      "policyType": "[parameters('policyType')]",
+      "retentionPolicy": {
+        "retentionPolicyType": "[parameters('retentionPolicyType')]"
+      },
+      "schedulePolicy": {
+        "schedulePolicyType": "[parameters('schedulePolicyType')]"
+      },
+      "timeZone": "string"
+    }
+  },
+  "resources": [],
+  "outputs": {
+    "protectionPolicy": {
+      "type": "object",
+      "value": "[variables('protectionPolicy')]"
+    }
+  }
+}
