@@ -16,7 +16,7 @@ jobs:
           $TemplateFile = Get-Item -Path $_.TemplateFile;
           $Template = Get-Content $TemplateFile |ConvertFrom-Json;
           $ContentVersion = $Template.ContentVersion;
-          export CONTAINER=$ContentVersion
+          $env.CONTAINER = $ContentVersion;
           Invoke-PSDocument -Module PSDocs.Azure -OutputPath "out/docs" -InputObject $TemplateFile.FullName -InstanceName $TemplateFile.BaseName;
         };
         New-Item docs -ItemType Directory -Force;
