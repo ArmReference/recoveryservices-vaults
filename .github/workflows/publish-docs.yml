@@ -39,4 +39,5 @@ jobs:
       with:
         azcliversion: 2.34.1
         inlinescript: |
-          az storage blob upload-batch --source reference --destination ${{steps.Container_Name.outputs.CONTAINER}} --connection-string ${{ secrets.ConnectionString }} --destination-path Microsoft.RecoveryServices/reference
+          az storage container create --name ${{steps.Container_Name.outputs.CONTAINER}} --account-name ${{ secrets.AccountName }} --account-key ${{ secrets.AccountKey }}
+          az storage blob upload-batch --account-name ${{ secrets.AccountName }} --account-key ${{ secrets.AccountKey }} -d ${{steps.Container_Name.outputs.CONTAINER}} -s .\reference --destination-path Microsoft.RecoveryServices/reference
