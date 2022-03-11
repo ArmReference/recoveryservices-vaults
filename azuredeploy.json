@@ -410,19 +410,22 @@
    }
   }
  ],
- "outputs": {
-  "vault": {
+  "outputs": {
+  "armTemplate": {
    "type": "object",
-   "value": "[reference('BuildRecoveryServicesVault').outputs.vaults.value]",
+   "value": {
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.2",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+     "[reference('BuildRecoveryServicesVault').outputs.vaults.value]",
+     "[reference('BuildVmProtectionPolicy').outputs.protectionPolicy.value]"
+    ],
+    "outputs": {}
+   },
    "metadata":{
-    "description":"The Vault Template."
-   }
-  },
-  "protectionPolicy": {
-   "type": "object",
-   "value": "[reference('BuildVmProtectionPolicy').outputs.protectionPolicy.value]",
-   "metadata":{
-    "description":"The Protection Policy."
+    "description":"Fully populated template"
    }
   }
  }
