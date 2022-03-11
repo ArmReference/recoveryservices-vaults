@@ -1,41 +1,43 @@
-# Create Recovery Services Vault
-
-This template creates an Recovery Services Vault in Azure
-
-This template is a reference built on the API for this resource.
+# Azure template
 
 ## Parameters
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-StorageAccountName | Yes      | The name of the Azure Storage Account where the templates are stored
-ContainerName  | Yes      | The Container inside the Storage Account
-SasToken       | Yes      | The Shared Access Signature for the Storage Account
+name           | Yes      | The name of the recovery services vault.
+sku            | Yes      | Identifies the unique system identifier for each Azure resource.
+tags           | Yes      | Resource tags.
+DependsOn      | No       | Pass dependencies
 
-### StorageAccountName
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-The name of the Azure Storage Account where the templates are stored
-
-### ContainerName
+### name
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The Container inside the Storage Account
+The name of the recovery services vault.
 
-### SasToken
+### sku
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The Shared Access Signature for the Storage Account
+Identifies the unique system identifier for each Azure resource.
+
+### tags
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+Resource tags.
+
+### DependsOn
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+Pass dependencies
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-vault | object | The Vault Template
-protectionPolicy | object | The Protection Policy
+vaults | object |
 
 ## Snippets
 
@@ -46,17 +48,20 @@ protectionPolicy | object | The Protection Policy
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "azuredeploy.json"
+        "template": "reference/vaults.json"
     },
     "parameters": {
-        "StorageAccountName": {
+        "name": {
             "value": ""
         },
-        "ContainerName": {
-            "value": ""
+        "sku": {
+            "value": {}
         },
-        "SasToken": {
-            "value": ""
+        "tags": {
+            "value": {}
+        },
+        "DependsOn": {
+            "value": []
         }
     }
 }

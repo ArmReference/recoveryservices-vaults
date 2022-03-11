@@ -1,41 +1,31 @@
-# Create Recovery Services Vault
-
-This template creates an Recovery Services Vault in Azure
-
-This template is a reference built on the API for this resource.
+# Azure template
 
 ## Parameters
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-StorageAccountName | Yes      | The name of the Azure Storage Account where the templates are stored
-ContainerName  | Yes      | The Container inside the Storage Account
-SasToken       | Yes      | The Shared Access Signature for the Storage Account
+count          | Yes      | Count of the duration types. Retention duration is determined by the combining the Count times and durationType. For example, if Count = 3 and durationType = Weeks, then the retention duration is three weeks.
+durationType   | Yes      | The retention duration type of the retention policy.
 
-### StorageAccountName
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-The name of the Azure Storage Account where the templates are stored
-
-### ContainerName
+### count
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The Container inside the Storage Account
+Count of the duration types. Retention duration is determined by the combining the Count times and durationType. For example, if Count = 3 and durationType = Weeks, then the retention duration is three weeks.
 
-### SasToken
+### durationType
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The Shared Access Signature for the Storage Account
+The retention duration type of the retention policy.
+
+- Allowed values: `Days`, `Invalid`, `Months`, `Weeks`, `Years`
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-vault | object | The Vault Template
-protectionPolicy | object | The Protection Policy
+retentionDuration | object |
 
 ## Snippets
 
@@ -46,16 +36,13 @@ protectionPolicy | object | The Protection Policy
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "azuredeploy.json"
+        "template": "reference/retentionDuration.json"
     },
     "parameters": {
-        "StorageAccountName": {
-            "value": ""
+        "count": {
+            "value": 0
         },
-        "ContainerName": {
-            "value": ""
-        },
-        "SasToken": {
+        "durationType": {
             "value": ""
         }
     }

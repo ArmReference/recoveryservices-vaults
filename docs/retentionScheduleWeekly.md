@@ -1,41 +1,29 @@
-# Create Recovery Services Vault
-
-This template creates an Recovery Services Vault in Azure
-
-This template is a reference built on the API for this resource.
+# Azure template
 
 ## Parameters
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-StorageAccountName | Yes      | The name of the Azure Storage Account where the templates are stored
-ContainerName  | Yes      | The Container inside the Storage Account
-SasToken       | Yes      | The Shared Access Signature for the Storage Account
+daysOfTheWeek  | Yes      |
+weeksOfTheMonth | Yes      |
 
-### StorageAccountName
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-The name of the Azure Storage Account where the templates are stored
-
-### ContainerName
+### daysOfTheWeek
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The Container inside the Storage Account
 
-### SasToken
+
+### weeksOfTheMonth
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The Shared Access Signature for the Storage Account
+
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-vault | object | The Vault Template
-protectionPolicy | object | The Protection Policy
+retentionScheduleWeekly | object |
 
 ## Snippets
 
@@ -46,17 +34,14 @@ protectionPolicy | object | The Protection Policy
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "azuredeploy.json"
+        "template": "reference/retentionScheduleWeekly.json"
     },
     "parameters": {
-        "StorageAccountName": {
-            "value": ""
+        "daysOfTheWeek": {
+            "value": []
         },
-        "ContainerName": {
-            "value": ""
-        },
-        "SasToken": {
-            "value": ""
+        "weeksOfTheMonth": {
+            "value": []
         }
     }
 }
