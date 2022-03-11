@@ -16,12 +16,12 @@ jobs:
         Get-AzDocTemplateFile | ForEach-Object {
           $TemplateFile = Get-Item -Path $_.TemplateFile;
           if ($TemplateFile.BaseName -eq 'azuredeploy') {
+            $Template = Get-Content $TemplateFile |ConvertFrom-Json;
             $RepoName = $TemplateFile.Directory.Parent.Name;
             $Version = $Template.ContentVersion;
             $ReadmeHeader = "[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2F$($RepoName)%2F$($Version)%2Fazuredeploy.json)"
           }
-          $Template = Get-Content $TemplateFile |ConvertFrom-Json;
-          $ContentVersion = (Get-Date).GetDateTimeFormats()[1];
+          $Container = (Get-Date).GetDateTimeFormats()[1];
           Invoke-PSDocument -Module PSDocs.Azure -OutputPath "out/docs" -InputObject $TemplateFile.FullName -InstanceName $TemplateFile.BaseName;
         };
         New-Item docs -ItemType Directory -Force;
@@ -30,7 +30,7 @@ jobs:
         Write-Output $Readme |Out-File "README.md" -Append;
         Remove-Item "out/docs/azuredeploy.md"
         Move-Item "out/docs/*.md" docs/ -Force;
-        echo "::set-output name=CONTAINER::$($ContentVersion)"
+        echo "::set-output name=CONTAINER::$($Container)"
       shell: pwsh
     - name: Setup Git Config
       run:
