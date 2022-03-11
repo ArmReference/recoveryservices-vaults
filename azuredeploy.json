@@ -8,19 +8,19 @@
   "StorageAccountName": {
    "type": "string",
    "metadata": {
-    "description": "The name of the Azure Storage Account where the templates are stored"
+    "description": "The name of the Azure Storage Account where the templates are stored."
    }
   },
   "ContainerName": {
    "type": "string",
    "metadata": {
-    "description": "The Container inside the Storage Account"
+    "description": "The Container inside the Storage Account."
    }
   },
   "SasToken": {
    "type": "string",
    "metadata": {
-    "description": "The Shared Access Signature for the Storage Account"
+    "description": "The Shared Access Signature for the Storage Account."
    }
   }
  },
@@ -415,14 +415,14 @@
    "type": "object",
    "value": "[reference('BuildRecoveryServicesVault').outputs.vaults.value]",
    "metadata":{
-    "description":"The Vault Template"
+    "description":"The Vault Template."
    }
   },
   "protectionPolicy": {
    "type": "object",
    "value": "[reference('BuildVmProtectionPolicy').outputs.protectionPolicy.value]",
    "metadata":{
-    "description":"The Protection Policy"
+    "description":"The Protection Policy."
    }
   }
  }
