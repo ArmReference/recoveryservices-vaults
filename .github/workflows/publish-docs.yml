@@ -16,7 +16,7 @@ jobs:
           $TemplateFile = Get-Item -Path $_.TemplateFile;
           $Template = Get-Content $TemplateFile |ConvertFrom-Json;
           $ContentVersion = $Template.ContentVersion;
-          $env.CONTAINER = $ContentVersion;
+          $env:CONTAINER = $ContentVersion;
           Invoke-PSDocument -Module PSDocs.Azure -OutputPath "out/docs" -InputObject $TemplateFile.FullName -InstanceName $TemplateFile.BaseName;
         };
         New-Item docs -ItemType Directory -Force;
@@ -37,4 +37,5 @@ jobs:
       with:
         source_dir: reference
         container_name: (echo $CONTAINER)
+        extra_args: '--destination-path Microsoft.RecoveryServices/reference'
         connection_string: ${{ secrets.ConnectionString }}
