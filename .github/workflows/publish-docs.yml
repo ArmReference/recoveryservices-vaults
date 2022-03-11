@@ -38,5 +38,5 @@ jobs:
       with:
         azcliversion: 2.34.1
         inlinescript: |
-          Get-ChildItem env:
+          echo $CONTAINER
           az storage blob upload-batch --source reference --destination $env:CONTAINER --Connection-String ${{ secrets.ConnectionString }} --destination-path Microsoft.RecoveryServices/reference
