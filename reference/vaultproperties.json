@@ -1,0 +1,54 @@
+{
+ "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+ "contentVersion": "1.0.0.3",
+ "parameters": {
+  "infrastructureEncryption": {
+   "type": "string",
+   "allowedValues": [
+    "Disabled",
+    "Enabled"
+   ],
+   "metadata": {
+    "description": "Enabling/Disabling the Double Encryption state"
+   }
+  },
+  "userAssignedIdentity": {
+   "type": "string",
+   "metadata": {
+    "description": "The user assigned identity to be used to grant permissions in case the type of identity used is UserAssigned"
+   }
+  },
+  "useSystemAssignedIdentity": {
+   "type": "bool",
+   "metadata": {
+    "description": "Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field"
+   }
+  },
+  "keyUri": {
+   "type": "string",
+   "metadata": {
+    "description": "The key uri of the Customer Managed Key"
+   }
+  }
+ },
+ "variables": {
+  "encryption": {
+   "infrastructureEncryption": "[parameters('infrastructureEncryption')]",
+   "kekIdentity": {
+    "userAssignedIdentity": "[parameters('userAssignedIdentity')]",
+    "useSystemAssignedIdentity": "[parameters('useSystemAssignedIdentity')]"
+   },
+   "keyVaultProperties": {
+    "keyUri": "[parameters('keyUri')]"
+   }
+  }
+ },
+ "resources": [
+ ],
+ "outputs": {
+  "sku": {
+   "type": "object",
+   "value": "[variables('encryption')]"
+  }
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+ "contentVersion": "1.0.0.3",
+ "parameters": {
+  "type": {
+   "type": "string",
+   "allowedValues": [
+    "None",
+    "SystemAssigned",
+    "UserAssigned"
+   ],
+   "metadata": {
+    "description": "The type of managed identity used. "
+   }
+  },
+  "userAssignedIdentities": {
+   "type": "object",
+   "defaultValue": {},
+   "metadata": {
+    "description": "The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids i"
+   }
+  }
+ },
+ "variables": {
+  "identity": {
+   "type": "[parameters('type')]",
+   "userAssignedIdentities": "[parameters('userAssignedIdentities')]"
+  }
+ },
+ "resources": [
+ ],
+ "outputs": {
+  "identity": {
+   "type": "object",
+   "value": "[variables('identity')]"
+  }
+ }
+}
