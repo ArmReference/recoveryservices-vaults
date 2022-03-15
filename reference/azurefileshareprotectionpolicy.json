@@ -1,0 +1,108 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.3",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 150,
+      "metadata": {
+        "description": "Resource name associated with the resource."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Resource location."
+      }
+    },
+    "tags": {
+      "type": "object",
+      "metadata": {
+        "description": "Resource tags."
+      }
+    },
+    "eTag": {
+      "type": "string",
+      "metadata": {
+        "description": "Optional ETag."
+      }
+    },
+    "timeZone": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'."
+      }
+    },
+    "workLoadType": {
+      "type": "string",
+      "allowedValues": [
+        "AzureFileShare",
+        "AzureSqlDb",
+        "Client",
+        "Exchange",
+        "FileFolder",
+        "GenericDataSource",
+        "Invalid",
+        "SAPAseDatabase",
+        "SAPHanaDatabase",
+        "SQLDB",
+        "SQLDataBase",
+        "Sharepoint",
+        "SystemState",
+        "VM",
+        "VMwareVM"
+      ],
+      "metadata": {
+        "description": "Type of workload for the backup management"
+      }
+    },
+    "retentionPolicy": {
+      "type": "object",
+      "metadata": {
+        "description": "The retention policy with the details on backup copy retention ranges."
+      }
+    },
+    "schedulePolicy": {
+      "type": "object",
+      "metadata": {
+        "description": "The backup schedule specified as part of backup policy."
+      }
+    },
+    "DependsOn": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Pass dependencies"
+      }
+    }
+  },
+  "variables": {
+    "backupPolicies": {
+      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "apiVersion": "2021-12-01",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
+      "name": "[parameters('name')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
+      "eTag": "[parameters('eTag')]",
+      "properties": {
+        "backupManagementType": "AzureStorage",
+        "retentionPolicy": "[parameters('retentionPolicy')]",
+        "schedulePolicy": "[parameters('schedulePolicy')]",
+        "timeZone": "[parameters('timeZone')]",
+        "workLoadType": "[parameters('workLoadType')]"
+      }
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "backupPolicies": {
+      "type": "object",
+      "value": "[variables('backupPolicies')]"
+    }
+  }
+}
