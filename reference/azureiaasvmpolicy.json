@@ -96,7 +96,10 @@
   "outputs": {
     "backupPolicies": {
       "type": "object",
-      "value": "[variables('backupPolicies')]"
+      "value": "[variables('backupPolicies')]",
+      "metadata": {
+        "description": "IaaS VM workload-specific backup policy."
+      }
     }
   }
 }

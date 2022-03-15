@@ -70,7 +70,10 @@
   "outputs": {
     "backupPolicies": {
       "type": "object",
-      "value": "[variables('backupPolicies')]"
+      "value": "[variables('backupPolicies')]",
+      "metadata": {
+        "description": "Mab container-specific backup policy."
+      }
     }
   }
 }
