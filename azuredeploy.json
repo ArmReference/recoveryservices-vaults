@@ -91,7 +91,7 @@
     },
     "parameters": {
      "name": {
-      "value": "[concat(reference('BuildRecoveryServicesVault').outputs.name.value,'/AzureVmWorkloadProtectionPolicy')]"
+      "value": "[concat(reference('BuildRecoveryServicesVault').outputs.valuts.value.name,'/AzureVmWorkloadProtectionPolicy')]"
      },
      "makePolicyConsistent": {
       "value": true
