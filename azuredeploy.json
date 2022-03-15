@@ -2,7 +2,8 @@
  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
  "contentVersion": "1.0.0.3",
  "metadata": {
-  "description": "These templates are not meant for deployment, they simply build reference templates that could then be deployed."
+  "summary": "These templates are not meant for deployment, they simply build reference templates",
+  "description": "This template generates a reference for a Recovery Vault with a single AzureVmWorkloadProtectionPolicy"
  },
  "parameters": {
   "StorageAccountName": {
@@ -28,7 +29,6 @@
   "Provider": "/Microsoft.RecoveryServices",
   "Resource": "/reference",
   "templateUri": "[concat('https://',parameters('StorageAccountName'),'.blob.core.windows.net/',parameters('ContainerName'),variables('Provider'),variables('Resource'))]"
-
  },
  "resources": [
   {
@@ -71,6 +71,149 @@
      },
      "tags": {
       "value": "[json('{\"TagName\": \"TagValue\"}')]"
+     }
+    }
+   }
+  },
+  {
+   "name": "BuildAzureVmWorkloadProtectionPolicy",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','BuildRecoveryServicesVault')]",
+    "[concat('Microsoft.Resources/deployments/','DefineSubProtectionPolicy')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/azurevmworkloadprotectionpolicy.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.3"
+    },
+    "parameters": {
+     "name": {
+      "value": "AzureVmWorkloadProtectionPolicy"
+     },
+     "makePolicyConsistent": {
+      "value": true
+     },
+     "isCompression": {
+      "value": false
+     },
+     "issqlcompression": {
+      "value": false
+     },
+     "subProtectionPolicy": {
+      "value": "[createArray(reference('DefineSubProtectionPolicy').outputs.subProtectionPolicy.value)]"
+     },
+     "tags": {
+      "value": "[json('{\"TagName\": \"TagValue\"}')]"
+     },
+     "timeZone": {
+      "value": "Eastern Standard Time"
+     },
+     "workLoadType": {
+      "value": "SystemState"
+     }
+    }
+   }
+  },
+  {
+   "name": "DefineSubProtectionPolicy",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','DefineRetentionPolicy')]",
+    "[concat('Microsoft.Resources/deployments/','DefineSchedulePolicy')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/schedulePolicy.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.3"
+    },
+    "parameters": {
+     "policyType": {
+      "value": "Incremental"
+     },
+     "scheduleRunDays": {
+      "value": []
+     },
+     "scheduleRunFrequency": {
+      "value": "Daily"
+     },
+     "scheduleRunTimes": {
+      "value": "[createArray('02:30')]"
+     },
+     "scheduleWeeklyFrequency": {
+      "value": 0
+     }
+    }
+   }
+  },
+  {
+   "name": "DefineRetentionPolicy",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','DefineDailySchedulePolicy')]",
+    "[concat('Microsoft.Resources/deployments/','DefineWeeklySchedulePolicy')]",
+    "[concat('Microsoft.Resources/deployments/','DefineMonthlySchedulePolicy')]",
+    "[concat('Microsoft.Resources/deployments/','DefineYearlySchedulePolicy')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/retentionPolicy.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.3"
+    },
+    "parameters": {
+     "dailySchedule": {
+      "value": "[reference('DefineDailySchedulePolicy').outputs.dailySchedule.value]"
+     },
+     "monthlySchedule": {
+      "value": "[reference('DefineMonthlySchedulePolicy').outputs.monthlySchedule.value]"
+     },
+     "retentionPolicyType": {
+      "value": "LongTermRetentionPolicy"
+     },
+     "retentionDuration": {
+      "value": {}
+     },
+     "weeklySchedule": {
+      "value": "[reference('DefineWeeklySchedulePolicy').outputs.weeklySchedule.value]"
+     },
+     "yearlySchedule": {
+      "value": "[reference('DefineYearlySchedulePolicy').outputs.yearlySchedule.value]"
+     }
+    }
+   }
+  },
+  {
+   "name": "DefineSchedulePolicy",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/schedulePolicy.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.3"
+    },
+    "parameters": {
+     "schedulePolicyType": {
+      "value": "SimpleSchedulePolicy"
+     },
+     "scheduleRunDays": {
+      "value": []
+     },
+     "scheduleRunFrequency": {
+      "value": "Daily"
+     },
+     "scheduleRunTimes": {
+      "value": "[createArray('02:30')]"
+     },
+     "scheduleWeeklyFrequency": {
+      "value": 0
      }
     }
    }
@@ -293,115 +436,6 @@
      },
      "retentionTimes": {
       "value": "[createArray('02:30')]"
-     }
-    }
-   }
-  },
-  {
-   "name": "DefineRetentionPolicy",
-   "type": "Microsoft.Resources/deployments",
-   "apiVersion": "2021-04-01",
-   "dependsOn": [
-    "[concat('Microsoft.Resources/deployments/','DefineDailySchedulePolicy')]",
-    "[concat('Microsoft.Resources/deployments/','DefineWeeklySchedulePolicy')]",
-    "[concat('Microsoft.Resources/deployments/','DefineMonthlySchedulePolicy')]",
-    "[concat('Microsoft.Resources/deployments/','DefineYearlySchedulePolicy')]"
-   ],
-   "properties": {
-    "mode": "Incremental",
-    "templateLink": {
-     "uri": "[concat(variables('templateUri'), '/retentionPolicy.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.3"
-    },
-    "parameters": {
-     "dailySchedule": {
-      "value": "[reference('DefineDailySchedulePolicy').outputs.dailySchedule.value]"
-     },
-     "monthlySchedule": {
-      "value": "[reference('DefineMonthlySchedulePolicy').outputs.monthlySchedule.value]"
-     },
-     "retentionPolicyType": {
-      "value": "LongTermRetentionPolicy"
-     },
-     "retentionDuration": {
-      "value": {}
-     },
-     "weeklySchedule": {
-      "value": "[reference('DefineWeeklySchedulePolicy').outputs.weeklySchedule.value]"
-     },
-     "yearlySchedule": {
-      "value": "[reference('DefineYearlySchedulePolicy').outputs.yearlySchedule.value]"
-     }
-    }
-   }
-  },
-  {
-   "name": "DefineSchedulePolicy",
-   "type": "Microsoft.Resources/deployments",
-   "apiVersion": "2021-04-01",
-   "dependsOn": [],
-   "properties": {
-    "mode": "Incremental",
-    "templateLink": {
-     "uri": "[concat(variables('templateUri'), '/schedulePolicy.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.3"
-    },
-    "parameters": {
-     "schedulePolicyType": {
-      "value": "SimpleSchedulePolicy"
-     },
-     "scheduleRunDays": {
-      "value": []
-     },
-     "scheduleRunFrequency": {
-      "value": "Daily"
-     },
-     "scheduleRunTimes": {
-      "value": "[createArray('02:30')]"
-     },
-     "scheduleWeeklyFrequency": {
-      "value": 0
-     }
-    }
-   }
-  },
-
-  {
-   "name": "BuildVmProtectionPolicy",
-   "type": "Microsoft.Resources/deployments",
-   "apiVersion": "2021-04-01",
-   "dependsOn": [
-    "[concat('Microsoft.Resources/deployments/','BuildRecoveryServicesVault')]",
-    "[concat('Microsoft.Resources/deployments/','DefineRetentionPolicy')]",
-    "[concat('Microsoft.Resources/deployments/','DefineSchedulePolicy')]"
-   ],
-   "properties": {
-    "mode": "Incremental",
-    "templateLink": {
-     "uri": "[concat(variables('templateUri'), '/protectionPolicy.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.3"
-    },
-    "parameters": {
-     "name": {
-      "value": "BackupPolicy"
-     },
-     "backupManagementType": {
-      "value": "AzureIaasVM"
-     },
-     "retentionPolicy": {
-      "value": "[reference('DefineRetentionPolicy').outputs.retentionPolicy.value]"
-     },
-     "schedulePolicy": {
-      "value": "[reference('DefineSchedulePolicy').outputs.schedulePolicy.value]"
-     },
-     "tags": {
-      "value": "[json('{\"TagName\": \"TagValue\"}')]"
-     },
-     "timeZone": {
-      "value": "Eastern Standard Time"
-     },
-     "recoveryServicesName": {
-      "value": "[reference('BuildRecoveryServicesVault').outputs.vaults.value.name]"
      }
     }
    }
