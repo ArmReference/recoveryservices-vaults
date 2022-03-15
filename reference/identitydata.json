@@ -4,6 +4,7 @@
  "parameters": {
   "type": {
    "type": "string",
+   "defaultValue": "None",
    "allowedValues": [
     "None",
     "SystemAssigned",
