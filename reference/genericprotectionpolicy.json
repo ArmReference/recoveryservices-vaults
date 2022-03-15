@@ -1,0 +1,84 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.3",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 150,
+      "metadata": {
+        "description": "Resource name associated with the resource."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Resource location."
+      }
+    },
+    "tags": {
+      "type": "object",
+      "metadata": {
+        "description": "Resource tags."
+      }
+    },
+    "eTag": {
+      "type": "string",
+      "metadata": {
+        "description": "Optional ETag."
+      }
+    },
+    "fabricName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of this policy's fabric."
+      }
+    },
+    "timeZone": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'."
+      }
+    },
+    "subProtectionPolicy": {
+      "type": "array",
+      "metadata": {
+        "description": "List of sub-protection policies which includes schedule and retention"
+      }
+    },
+    "DependsOn": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Pass dependencies"
+      }
+    }
+  },
+  "variables": {
+    "backupPolicies": {
+      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "apiVersion": "2021-12-01",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
+      "name": "[parameters('name')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
+      "eTag": "[parameters('eTag')]",
+      "properties": {
+        "backupManagementType": "GenericProtectionPolicy",
+        "fabricName": "[parameters('fabricName')]",
+        "subProtectionPolicy": "[parameters('subProtectionPolicy')]",
+        "timeZone": "[parameters('timeZone')]"
+      }
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "backupPolicies": {
+      "type": "object",
+      "value": "[variables('backupPolicies')]"
+    }
+  }
+}
