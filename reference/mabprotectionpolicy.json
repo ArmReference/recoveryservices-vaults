@@ -54,7 +54,7 @@
       "properties": {
         "backupManagementType": "MAB",
         "retentionPolicy": "[parameters('retentionPolicy')]",
-        "schedulePolicy": "[parameters('schedulePolicy')]",
+        "schedulePolicy": "[parameters('schedulePolicy')]"
       }
     }
   },
