@@ -12,6 +12,7 @@ azureBackupRGNameSuffix | No       | Suffix to apply to a ResourceGroup for back
 instantRpRetentionRangeInDays | No       | Instant RP retention policy range in days
 retentionPolicy | Yes      | Type of backup policy type
 schedulePolicy | Yes      | Type of backup policy type
+timeZone       | No       | TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
 DependsOn      | No       | Pass dependencies
 
 ### name
@@ -66,6 +67,12 @@ Type of backup policy type
 
 Type of backup policy type
 
+### timeZone
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
+
 ### DependsOn
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
@@ -113,6 +120,9 @@ backupPolicies | object | IaaS VM workload-specific backup policy.
         },
         "schedulePolicy": {
             "value": {}
+        },
+        "timeZone": {
+            "value": ""
         },
         "DependsOn": {
             "value": []
