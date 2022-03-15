@@ -50,11 +50,60 @@
    }
   },
   {
-   "name": "BuildRecoveryServicesVault",
+   "name": "DefineVaultProperties",
    "type": "Microsoft.Resources/deployments",
    "apiVersion": "2021-04-01",
    "dependsOn": [
     "[concat('Microsoft.Resources/deployments/','BuildSKU')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/vaultproperties.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.4"
+    },
+    "parameters": {
+     "infrastructureEncryption": {
+      "value": "Disabled"
+     },
+     "useSystemAssignedIdentity": {
+      "value": true
+     },
+     "userAssignedIdentity": {
+      "value": ""
+     }
+    }
+   }
+  },
+  {
+   "name": "DefineIdentity",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','BuildSKU')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/identitydata.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.4"
+    },
+    "parameters": {
+     "type": {
+      "value": "None"
+     }
+    }
+   }
+  },
+  {
+   "name": "BuildRecoveryServicesVault",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','BuildSKU')]",
+    "[concat('Microsoft.Resources/deployments/','DefineVaultProperties')]",
+    "[concat('Microsoft.Resources/deployments/','DefineIdentity')]"
+
    ],
    "properties": {
     "mode": "Incremental",
@@ -68,6 +117,12 @@
      },
      "sku": {
       "value": "[reference('BuildSKU').outputs.sku.value]"
+     },
+     "VaultProperties": {
+      "value": "[reference('DefineVaultProperties').outputs.encryption.value]"
+     },
+     "identity":{
+      "value": "[reference('DefineIdentity').outputs.identity.value]"
      },
      "tags": {
       "value": "[json('{\"TagName\": \"TagValue\"}')]"
@@ -435,7 +490,7 @@
    }
   }
  ],
-  "outputs": {
+ "outputs": {
   "armTemplate": {
    "type": "object",
    "value": {
@@ -449,8 +504,8 @@
     ],
     "outputs": {}
    },
-   "metadata":{
-    "description":"Fully populated template"
+   "metadata": {
+    "description": "Fully populated template"
    }
   }
  }
