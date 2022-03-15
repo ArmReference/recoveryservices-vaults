@@ -15,6 +15,7 @@
   },
   "userAssignedIdentity": {
    "type": "string",
+   "defaultValue": "",
    "metadata": {
     "description": "The user assigned identity to be used to grant permissions in case the type of identity used is UserAssigned"
    }
