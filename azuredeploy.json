@@ -128,7 +128,7 @@
    "properties": {
     "mode": "Incremental",
     "templateLink": {
-     "uri": "[concat(variables('templateUri'), '/schedulePolicy.json', parameters('SasToken'))]",
+     "uri": "[concat(variables('templateUri'), '/subprotectionpolicy.json', parameters('SasToken'))]",
      "contentVersion": "1.0.0.4"
     },
     "parameters": {
