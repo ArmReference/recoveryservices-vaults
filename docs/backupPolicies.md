@@ -7,7 +7,6 @@ Parameter name | Required | Description
 name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | Yes      | Resource tags.
-eTag           | Yes      | Optional ETag.
 properties     | Yes      | Base class for backup policy. Workload-specific backup policies are derived from this class.
 DependsOn      | No       | Pass dependencies
 
@@ -30,12 +29,6 @@ Resource location.
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
 Resource tags.
-
-### eTag
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-Optional ETag.
 
 ### properties
 
@@ -75,9 +68,6 @@ backupPolicies | object |
         },
         "tags": {
             "value": {}
-        },
-        "eTag": {
-            "value": ""
         },
         "properties": {
             "value": {}

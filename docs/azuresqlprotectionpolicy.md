@@ -7,7 +7,6 @@ Parameter name | Required | Description
 name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | No       | Resource tags.
-eTag           | No       | Optional ETag.
 retentionPolicy | Yes      | The retention policy with the details on backup copy retention ranges.
 DependsOn      | No       | Pass dependencies
 
@@ -30,12 +29,6 @@ Resource location.
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Resource tags.
-
-### eTag
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Optional ETag.
 
 ### retentionPolicy
 
@@ -75,9 +68,6 @@ backupPolicies | object | Azure SQL workload-specific backup policy.
         },
         "tags": {
             "value": {}
-        },
-        "eTag": {
-            "value": ""
         },
         "retentionPolicy": {
             "value": {}

@@ -7,7 +7,6 @@ Parameter name | Required | Description
 name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | No       | Resource tags.
-eTag           | No       | Optional ETag.
 makePolicyConsistent | Yes      | Fix the policy inconsistency
 isCompression  | Yes      | Workload compression flag. This has been added so that 'isSqlCompression' will be deprecated once clients upgrade to consider this flag.
 issqlcompression | Yes      | SQL compression flag
@@ -35,12 +34,6 @@ Resource location.
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Resource tags.
-
-### eTag
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Optional ETag.
 
 ### makePolicyConsistent
 
@@ -112,9 +105,6 @@ backupPolicies | object | Azure VM (Mercury) workload-specific backup policy.
         },
         "tags": {
             "value": {}
-        },
-        "eTag": {
-            "value": ""
         },
         "makePolicyConsistent": {
             "value": null
