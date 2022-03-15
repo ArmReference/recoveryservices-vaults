@@ -259,7 +259,7 @@
       "value": "Daily"
      },
      "scheduleRunTimes": {
-      "value": "[createArray('02:30')]"
+      "value": "[createArray('2021-03-15T02:30:00Z')]"
      },
      "scheduleWeeklyFrequency": {
       "value": 0
@@ -306,7 +306,7 @@
       "value": "[reference('DefineDailyRetentionDuration').outputs.retentionDuration.value]"
      },
      "retentionTimes": {
-      "value": "[createArray('02:30')]"
+      "value": "[createArray('2021-03-15T02:30:00Z')]"
      }
     }
    }
@@ -353,7 +353,7 @@
       "value": "[reference('DefineWeeklyRetentionDuration').outputs.retentionDuration.value]"
      },
      "retentionTimes": {
-      "value": "[createArray('02:30')]"
+      "value": "[createArray('2021-03-15T02:30:00Z')]"
      }
     }
    }
@@ -428,7 +428,7 @@
       "value": "[reference('DefineWeeklyRetentionSchedule').outputs.retentionScheduleWeekly.value]"
      },
      "retentionTimes": {
-      "value": "[createArray('02:30')]"
+      "value": "[createArray('2021-03-15T02:30:00Z')]"
      }
     }
    }
@@ -484,7 +484,7 @@
       "value": "[reference('DefineWeeklyRetentionSchedule').outputs.retentionScheduleWeekly.value]"
      },
      "retentionTimes": {
-      "value": "[createArray('02:30')]"
+      "value": "[createArray('2021-03-15T02:30:00Z')]"
      }
     }
    }

@@ -6,6 +6,10 @@
 
 This template defines the properties required to deploy a Recovery Services Vault in Azure.
 
+## Encryption
+
+Currently (2021-03-15) Enabling encryption at deployment time is in [public preview](https://docs.microsoft.com/en-us/azure/backup/encryption-at-rest-with-cmk?tabs=portal#enable-encryption-using-customer-managed-keys-at-vault-creation-in-preview).
+
 ## Common Complaints
 
 I will continue to harp on documentation and the lack thereof. We are missing defaults all over the place and often simple descriptions both of which would go a long way towards making this documentation much more useful and functional.
