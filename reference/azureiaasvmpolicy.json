@@ -50,26 +50,14 @@
         "description": "Instant RP retention policy range in days"
       }
     },
-    "retentionPolicyType": {
-      "type": "string",
-      "defaultValue": "SimpleRetentionPolicy",
-      "allowedValues": [
-        "LongTermRetentionPolicy",
-        "SimpleRetentionPolicy"
-      ],
+    "retentionPolicy": {
+      "type": "object",
       "metadata": {
         "description": "Type of backup policy type"
       }
     },
-    "schedulePolicyType": {
-      "type": "string",
-      "defaultValue": "SimpleSchedulePolicy",
-      "allowedValues": [
-        "LogSchedulePolicy",
-        "LongTermSchedulePolicy",
-        "SimpleSchedulePolicy",
-        "SimpleSchedulePolicyV2"
-      ],
+    "schedulePolicy": {
+      "type": "object",
       "metadata": {
         "description": "Type of backup policy type"
       }
@@ -98,12 +86,8 @@
           "azureBackupRGNameSuffix": "[parameters('azureBackupRGNameSuffix')]"
         },
         "instantRpRetentionRangeInDays": "[parameters('instantRpRetentionRangeInDays')]",
-        "retentionPolicy": {
-          "retentionPolicyType": "[parameters('retentionPolicyType')]"
-        },
-        "schedulePolicy": {
-          "schedulePolicyType": "[parameters('schedulePolicyType')]"
-        },
+        "retentionPolicy": "[parameters('retentionPolicy')]",
+        "schedulePolicy": "[parameters('schedulePolicy')]",
         "timeZone": "string"
       }
     }

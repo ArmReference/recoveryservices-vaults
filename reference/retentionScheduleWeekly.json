@@ -1,18 +1,21 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.3",
   "parameters": {
     "daysOfTheWeek": {
-      "type": "array"
+      "type": "array",
+      "metadata": {
+        "description": "List of days of the week."
+      }
     },
     "weeksOfTheMonth": {
-      "type": "array"
+      "type": "array",
+      "metadata": {
+        "description": "List of weeks of month."
+      }
     }
   },
   "variables": {
-    "comments": {
-      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#weeklyretentionformat"
-    },
     "retentionScheduleWeekly": {
       "daysOfTheWeek": "[parameters('daysOfTheWeek')]",
       "weeksOfTheMonth": "[parameters('weeksOfTheMonth')]"

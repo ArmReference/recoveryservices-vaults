@@ -37,3 +37,6 @@ The only property required is "name" and it is an enum of strings:
 
 I think any other key/value pairs passed in will be ignored but I've not tested that. It's worth noting that you can pass in Name as RSO and Tier as Standard and ARM will accept that, so I'm unclear what the difference is.
 
+### SchedulePolicy
+
+It feels as though LongtermSchedulePolicy is missing all the things, for example the Log policy has two items, the type and frequency. The Simple schedule has the type, days it runs, times it runs and a frequency. Looking at Longterm it just has a string type, 'LongTermSchedulePolicy'.
