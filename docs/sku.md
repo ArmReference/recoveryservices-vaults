@@ -5,6 +5,9 @@
 Parameter name | Required | Description
 -------------- | -------- | -----------
 name           | No       | The sku name.
+capacity       | No       | The sku capacity.
+family         | No       | The sku family.
+size           | No       | The sku size.
 tier           | No       | The sku tier.
 
 ### name
@@ -15,7 +18,25 @@ The sku name.
 
 - Default value: `RS0`
 
-- Allowed values: `RS0`
+- Allowed values: `RS0`, `Standard`
+
+### capacity
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+The sku capacity.
+
+### family
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+The sku family.
+
+### size
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+The sku size.
 
 ### tier
 
@@ -23,15 +44,11 @@ The sku name.
 
 The sku tier.
 
-- Default value: `Standard`
-
-- Allowed values: `Standard`
-
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-sku  | object |
+sku  | object | Identifies the unique system identifier for each Azure resource.
 
 ## Snippets
 
@@ -48,8 +65,17 @@ sku  | object |
         "name": {
             "value": "RS0"
         },
+        "capacity": {
+            "value": ""
+        },
+        "family": {
+            "value": ""
+        },
+        "size": {
+            "value": ""
+        },
         "tier": {
-            "value": "Standard"
+            "value": ""
         }
     }
 }

@@ -53,7 +53,7 @@ Yearly retention schedule of the backup policy.
 
 Name | Type | Description
 ---- | ---- | -----------
-retentionPolicy | object |
+retentionPolicy | object | Retention policy with the details on backup copy retention ranges.
 
 ## Snippets
 

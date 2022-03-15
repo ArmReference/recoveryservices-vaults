@@ -5,8 +5,12 @@
 Parameter name | Required | Description
 -------------- | -------- | -----------
 name           | Yes      | The name of the recovery services vault.
+location       | No       | Resource location.
+etag           | No       | Optional ETag.
 sku            | Yes      | Identifies the unique system identifier for each Azure resource.
-tags           | Yes      | Resource tags.
+tags           | No       | Resource tags.
+identity       | No       |
+VaultProperties | No       | Customer Managed Key details of the resource.
 DependsOn      | No       | Pass dependencies
 
 ### name
@@ -14,6 +18,20 @@ DependsOn      | No       | Pass dependencies
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
 The name of the recovery services vault.
+
+### location
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+Resource location.
+
+- Default value: `[resourceGroup().location]`
+
+### etag
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+Optional ETag.
 
 ### sku
 
@@ -23,9 +41,21 @@ Identifies the unique system identifier for each Azure resource.
 
 ### tags
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Resource tags.
+
+### identity
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+
+
+### VaultProperties
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+Customer Managed Key details of the resource.
 
 ### DependsOn
 
@@ -54,10 +84,22 @@ vaults | object |
         "name": {
             "value": ""
         },
+        "location": {
+            "value": "[resourceGroup().location]"
+        },
+        "etag": {
+            "value": ""
+        },
         "sku": {
             "value": {}
         },
         "tags": {
+            "value": {}
+        },
+        "identity": {
+            "value": {}
+        },
+        "VaultProperties": {
             "value": {}
         },
         "DependsOn": {

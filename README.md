@@ -1,9 +1,9 @@
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2Frecoveryservices-vaults%2F1.0.0.3%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FArmReference%2Frecoveryservices-vaults%2F1.0.0.4%2Fazuredeploy.json)
 # Create Recovery Services Vault
 
-This template creates an Recovery Services Vault in Azure
+These templates are not meant for deployment, they simply build reference templates
 
-These templates are not meant for deployment, they simply build reference templates that could then be deployed.
+This template generates a reference for a Recovery Vault with a single AzureVmWorkloadProtectionPolicy
 
 ## Parameters
 

@@ -8,11 +8,7 @@ name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | Yes      | Resource tags.
 eTag           | Yes      | Optional ETag.
-azureBackupRGNamePrefix | No       | Prefix to apply to a ResourceGroup for backups
-azureBackupRGNameSuffix | No       | Suffix to apply to a ResourceGroup for backups
-instantRpRetentionRangeInDays | No       | Instant RP retention policy range in days
-retentionPolicy | Yes      | Type of backup policy type
-schedulePolicy | Yes      | Type of backup policy type
+retentionPolicy | Yes      | The retention policy with the details on backup copy retention ranges.
 DependsOn      | No       | Pass dependencies
 
 ### name
@@ -41,37 +37,11 @@ Resource tags.
 
 Optional ETag.
 
-### azureBackupRGNamePrefix
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Prefix to apply to a ResourceGroup for backups
-
-### azureBackupRGNameSuffix
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Suffix to apply to a ResourceGroup for backups
-
-### instantRpRetentionRangeInDays
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Instant RP retention policy range in days
-
-- Default value: `2`
-
 ### retentionPolicy
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Type of backup policy type
-
-### schedulePolicy
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-Type of backup policy type
+The retention policy with the details on backup copy retention ranges.
 
 ### DependsOn
 
@@ -83,7 +53,7 @@ Pass dependencies
 
 Name | Type | Description
 ---- | ---- | -----------
-backupPolicies | object | IaaS VM workload-specific backup policy.
+backupPolicies | object | Azure SQL workload-specific backup policy.
 
 ## Snippets
 
@@ -94,7 +64,7 @@ backupPolicies | object | IaaS VM workload-specific backup policy.
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/azureiaasvmpolicy.json"
+        "template": "reference/azuresqlprotectionpolicy.json"
     },
     "parameters": {
         "name": {
@@ -109,19 +79,7 @@ backupPolicies | object | IaaS VM workload-specific backup policy.
         "eTag": {
             "value": ""
         },
-        "azureBackupRGNamePrefix": {
-            "value": ""
-        },
-        "azureBackupRGNameSuffix": {
-            "value": ""
-        },
-        "instantRpRetentionRangeInDays": {
-            "value": 2
-        },
         "retentionPolicy": {
-            "value": {}
-        },
-        "schedulePolicy": {
             "value": {}
         },
         "DependsOn": {

@@ -4,31 +4,38 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-schedulePolicyType | Yes      |
-scheduleRunDays | No       |
-scheduleRunFrequency | Yes      | Defines the frequency interval (daily or weekly) for the schedule policy.
-scheduleRunTimes | No       |
-scheduleWeeklyFrequency | Yes      | The number of times per week the schedule runs.
+schedulePolicyType | Yes      | This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+scheduleFrequencyInMins | Yes      | Frequency of the log schedule operation of this policy in minutes.
+scheduleRunDays | No       | List of days of week this schedule has to be run.
+scheduleRunFrequency | Yes      | Frequency of the schedule operation of this policy.
+scheduleRunTimes | No       | List of times of day this schedule has to be run.
+scheduleWeeklyFrequency | Yes      | At every number weeks this schedule has to be run.
 
 ### schedulePolicyType
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
+This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
 
+- Allowed values: `LogSchedulePolicy`, `SimpleSchedulePolicy`, `LongTermSchedulePolicy`
 
-- Allowed values: `SimpleSchedulePolicy`, `LongTermSchedulePolicy`
+### scheduleFrequencyInMins
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+Frequency of the log schedule operation of this policy in minutes.
 
 ### scheduleRunDays
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-
+List of days of week this schedule has to be run.
 
 ### scheduleRunFrequency
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Defines the frequency interval (daily or weekly) for the schedule policy.
+Frequency of the schedule operation of this policy.
 
 - Allowed values: `Daily`, `Invalid`, `Weekly`
 
@@ -36,19 +43,19 @@ Defines the frequency interval (daily or weekly) for the schedule policy.
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-
+List of times of day this schedule has to be run.
 
 ### scheduleWeeklyFrequency
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-The number of times per week the schedule runs.
+At every number weeks this schedule has to be run.
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-schedulePolicy | object |
+schedulePolicy | object | Backup schedule specified as part of backup policy.
 
 ## Snippets
 
@@ -64,6 +71,9 @@ schedulePolicy | object |
     "parameters": {
         "schedulePolicyType": {
             "value": ""
+        },
+        "scheduleFrequencyInMins": {
+            "value": 0
         },
         "scheduleRunDays": {
             "value": []

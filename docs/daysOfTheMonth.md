@@ -4,20 +4,20 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-date           | Yes      |
-isLast         | No       |
+date           | Yes      | Date of the month
+isLast         | No       | Whether Date is last date of month
 
 ### date
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-
+Date of the month
 
 ### isLast
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-
+Whether Date is last date of month
 
 - Default value: `False`
 

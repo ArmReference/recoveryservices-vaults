@@ -4,7 +4,7 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-monthsOfYear   | Yes      |
+monthsOfYear   | Yes      | List of months of year of yearly retention policy.
 retentionDuration | Yes      | Retention duration of the retention policy.
 retentionScheduleDaily | No       | Daily retention format for the monthly retention policy.
 retentionScheduleFormatType | Yes      | Retention schedule format type for monthly retention policy.
@@ -15,7 +15,7 @@ retentionTimes | Yes      | Times in day when backup should be triggered. e.g. 0
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-
+List of months of year of yearly retention policy.
 
 ### retentionDuration
 

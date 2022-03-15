@@ -4,15 +4,15 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-daysOfTheWeek  | Yes      |
+daysOfTheWeek  | Yes      | List of days of week for weekly retention policy.
 retentionDuration | Yes      | Retention duration of retention policy.
-retentionTimes | Yes      |
+retentionTimes | Yes      | Retention times of retention policy.
 
 ### daysOfTheWeek
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-
+List of days of week for weekly retention policy.
 
 ### retentionDuration
 
@@ -24,7 +24,7 @@ Retention duration of retention policy.
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-
+Retention times of retention policy.
 
 ## Outputs
 

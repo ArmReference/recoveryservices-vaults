@@ -8,11 +8,10 @@ name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | Yes      | Resource tags.
 eTag           | Yes      | Optional ETag.
-azureBackupRGNamePrefix | No       | Prefix to apply to a ResourceGroup for backups
-azureBackupRGNameSuffix | No       | Suffix to apply to a ResourceGroup for backups
-instantRpRetentionRangeInDays | No       | Instant RP retention policy range in days
-retentionPolicy | Yes      | Type of backup policy type
-schedulePolicy | Yes      | Type of backup policy type
+timeZone       | No       | TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
+workLoadType   | Yes      | Type of workload for the backup management
+retentionPolicy | Yes      | The retention policy with the details on backup copy retention ranges.
+schedulePolicy | Yes      | The backup schedule specified as part of backup policy.
 DependsOn      | No       | Pass dependencies
 
 ### name
@@ -41,37 +40,31 @@ Resource tags.
 
 Optional ETag.
 
-### azureBackupRGNamePrefix
+### timeZone
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-Prefix to apply to a ResourceGroup for backups
+TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
 
-### azureBackupRGNameSuffix
+### workLoadType
 
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Suffix to apply to a ResourceGroup for backups
+Type of workload for the backup management
 
-### instantRpRetentionRangeInDays
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Instant RP retention policy range in days
-
-- Default value: `2`
+- Allowed values: `AzureFileShare`, `AzureSqlDb`, `Client`, `Exchange`, `FileFolder`, `GenericDataSource`, `Invalid`, `SAPAseDatabase`, `SAPHanaDatabase`, `SQLDB`, `SQLDataBase`, `Sharepoint`, `SystemState`, `VM`, `VMwareVM`
 
 ### retentionPolicy
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Type of backup policy type
+The retention policy with the details on backup copy retention ranges.
 
 ### schedulePolicy
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Type of backup policy type
+The backup schedule specified as part of backup policy.
 
 ### DependsOn
 
@@ -83,7 +76,7 @@ Pass dependencies
 
 Name | Type | Description
 ---- | ---- | -----------
-backupPolicies | object | IaaS VM workload-specific backup policy.
+backupPolicies | object | AzureStorage backup policy.
 
 ## Snippets
 
@@ -94,7 +87,7 @@ backupPolicies | object | IaaS VM workload-specific backup policy.
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/azureiaasvmpolicy.json"
+        "template": "reference/azurefileshareprotectionpolicy.json"
     },
     "parameters": {
         "name": {
@@ -109,14 +102,11 @@ backupPolicies | object | IaaS VM workload-specific backup policy.
         "eTag": {
             "value": ""
         },
-        "azureBackupRGNamePrefix": {
+        "timeZone": {
             "value": ""
         },
-        "azureBackupRGNameSuffix": {
+        "workLoadType": {
             "value": ""
-        },
-        "instantRpRetentionRangeInDays": {
-            "value": 2
         },
         "retentionPolicy": {
             "value": {}

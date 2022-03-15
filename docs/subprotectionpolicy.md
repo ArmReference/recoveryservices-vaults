@@ -4,26 +4,35 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-daysOfTheWeek  | Yes      | List of days of the week.
-weeksOfTheMonth | Yes      | List of weeks of month.
+policyType     | Yes      | Type of backup policy type
+retentionPolicy | Yes      | The retention policy with the details on backup copy retention ranges.
+schedulePolicy | Yes      | The backup schedule specified as part of backup policy.
 
-### daysOfTheWeek
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-List of days of the week.
-
-### weeksOfTheMonth
+### policyType
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-List of weeks of month.
+Type of backup policy type
+
+- Allowed values: `CopyOnlyFull`, `Differential`, `Full`, `Incremental`, `Invalid`, `Log`
+
+### retentionPolicy
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+The retention policy with the details on backup copy retention ranges.
+
+### schedulePolicy
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+The backup schedule specified as part of backup policy.
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-retentionScheduleWeekly | object |
+subProtectionPolicy | object | List of sub-protection policies which includes schedule and retention
 
 ## Snippets
 
@@ -34,14 +43,17 @@ retentionScheduleWeekly | object |
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/retentionScheduleWeekly.json"
+        "template": "reference/subprotectionpolicy.json"
     },
     "parameters": {
-        "daysOfTheWeek": {
-            "value": []
+        "policyType": {
+            "value": ""
         },
-        "weeksOfTheMonth": {
-            "value": []
+        "retentionPolicy": {
+            "value": {}
+        },
+        "schedulePolicy": {
+            "value": {}
         }
     }
 }

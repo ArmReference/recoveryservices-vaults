@@ -8,11 +8,12 @@ name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | Yes      | Resource tags.
 eTag           | Yes      | Optional ETag.
-azureBackupRGNamePrefix | No       | Prefix to apply to a ResourceGroup for backups
-azureBackupRGNameSuffix | No       | Suffix to apply to a ResourceGroup for backups
-instantRpRetentionRangeInDays | No       | Instant RP retention policy range in days
-retentionPolicy | Yes      | Type of backup policy type
-schedulePolicy | Yes      | Type of backup policy type
+makePolicyConsistent | Yes      | Fix the policy inconsistency
+isCompression  | Yes      | Workload compression flag. This has been added so that 'isSqlCompression' will be deprecated once clients upgrade to consider this flag.
+issqlcompression | Yes      | SQL compression flag
+timeZone       | No       | TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
+subProtectionPolicy | Yes      | List of sub-protection policies which includes schedule and retention
+workLoadType   | Yes      | Type of workload for the backup management
 DependsOn      | No       | Pass dependencies
 
 ### name
@@ -41,37 +42,43 @@ Resource tags.
 
 Optional ETag.
 
-### azureBackupRGNamePrefix
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Prefix to apply to a ResourceGroup for backups
-
-### azureBackupRGNameSuffix
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Suffix to apply to a ResourceGroup for backups
-
-### instantRpRetentionRangeInDays
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Instant RP retention policy range in days
-
-- Default value: `2`
-
-### retentionPolicy
+### makePolicyConsistent
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Type of backup policy type
+Fix the policy inconsistency
 
-### schedulePolicy
+### isCompression
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Type of backup policy type
+Workload compression flag. This has been added so that 'isSqlCompression' will be deprecated once clients upgrade to consider this flag.
+
+### issqlcompression
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+SQL compression flag
+
+### timeZone
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
+
+### subProtectionPolicy
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+List of sub-protection policies which includes schedule and retention
+
+### workLoadType
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+Type of workload for the backup management
+
+- Allowed values: `AzureFileShare`, `AzureSqlDb`, `Client`, `Exchange`, `FileFolder`, `GenericDataSource`, `Invalid`, `SAPAseDatabase`, `SAPHanaDatabase`, `SQLDB`, `SQLDataBase`, `Sharepoint`, `SystemState`, `VM`, `VMwareVM`
 
 ### DependsOn
 
@@ -83,7 +90,7 @@ Pass dependencies
 
 Name | Type | Description
 ---- | ---- | -----------
-backupPolicies | object | IaaS VM workload-specific backup policy.
+backupPolicies | object | Azure VM (Mercury) workload-specific backup policy.
 
 ## Snippets
 
@@ -94,7 +101,7 @@ backupPolicies | object | IaaS VM workload-specific backup policy.
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/azureiaasvmpolicy.json"
+        "template": "reference/azurevmworkloadprotectionpolicy.json"
     },
     "parameters": {
         "name": {
@@ -109,20 +116,23 @@ backupPolicies | object | IaaS VM workload-specific backup policy.
         "eTag": {
             "value": ""
         },
-        "azureBackupRGNamePrefix": {
+        "makePolicyConsistent": {
+            "value": null
+        },
+        "isCompression": {
+            "value": null
+        },
+        "issqlcompression": {
+            "value": null
+        },
+        "timeZone": {
             "value": ""
         },
-        "azureBackupRGNameSuffix": {
+        "subProtectionPolicy": {
+            "value": []
+        },
+        "workLoadType": {
             "value": ""
-        },
-        "instantRpRetentionRangeInDays": {
-            "value": 2
-        },
-        "retentionPolicy": {
-            "value": {}
-        },
-        "schedulePolicy": {
-            "value": {}
         },
         "DependsOn": {
             "value": []

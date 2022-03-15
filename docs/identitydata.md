@@ -4,26 +4,28 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-daysOfTheWeek  | Yes      | List of days of the week.
-weeksOfTheMonth | Yes      | List of weeks of month.
+type           | Yes      | The type of managed identity used. 
+userAssignedIdentities | No       | The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids i
 
-### daysOfTheWeek
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-List of days of the week.
-
-### weeksOfTheMonth
+### type
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-List of weeks of month.
+The type of managed identity used. 
+
+- Allowed values: `None`, `SystemAssigned`, `UserAssigned`
+
+### userAssignedIdentities
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids i
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-retentionScheduleWeekly | object |
+identity | object |
 
 ## Snippets
 
@@ -34,14 +36,14 @@ retentionScheduleWeekly | object |
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/retentionScheduleWeekly.json"
+        "template": "reference/identitydata.json"
     },
     "parameters": {
-        "daysOfTheWeek": {
-            "value": []
+        "type": {
+            "value": ""
         },
-        "weeksOfTheMonth": {
-            "value": []
+        "userAssignedIdentities": {
+            "value": {}
         }
     }
 }
