@@ -61,7 +61,7 @@
         "encryption": "[parameters('VaultProperties')]"
       },
       "identity": "[parameters('identity')]",
-      "tags": "[parameters('tags')]",
+      "tags": "[parameters('tags')]"
     }
   },
   "resources": [
