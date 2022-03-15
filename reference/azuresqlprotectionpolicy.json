@@ -1,0 +1,69 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.3",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 150,
+      "metadata": {
+        "description": "Resource name associated with the resource."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Resource location."
+      }
+    },
+    "tags": {
+      "type": "object",
+      "metadata": {
+        "description": "Resource tags."
+      }
+    },
+    "eTag": {
+      "type": "string",
+      "metadata": {
+        "description": "Optional ETag."
+      }
+    },
+    "retentionPolicy": {
+      "type": "object",
+      "metadata": {
+        "description": "The retention policy with the details on backup copy retention ranges."
+      }
+    },
+    "DependsOn": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Pass dependencies"
+      }
+    }
+  },
+  "variables": {
+    "backupPolicies": {
+      "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+      "apiVersion": "2021-12-01",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
+      "name": "[parameters('name')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
+      "eTag": "[parameters('eTag')]",
+      "properties": {
+        "backupManagementType": "AzureSql",
+        "retentionPolicy": "[parameters('retentionPolicy')]"
+      }
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "backupPolicies": {
+      "type": "object",
+      "value": "[variables('backupPolicies')]"
+    }
+  }
+}
