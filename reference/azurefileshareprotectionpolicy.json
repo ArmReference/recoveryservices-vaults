@@ -24,13 +24,6 @@
         "description": "Resource tags."
       }
     },
-    "eTag": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Optional ETag."
-      }
-    },
     "timeZone": {
       "type": "string",
       "defaultValue": "",
@@ -89,7 +82,6 @@
       "name": "[parameters('name')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tags')]",
-      "eTag": "[parameters('eTag')]",
       "properties": {
         "backupManagementType": "AzureStorage",
         "retentionPolicy": "[parameters('retentionPolicy')]",

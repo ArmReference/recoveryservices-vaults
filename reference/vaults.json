@@ -17,13 +17,6 @@
         "description": "Resource location."
       }
     },
-    "etag": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Optional ETag."
-      }
-    },
     "sku": {
       "type": "object",
       "metadata": {
@@ -69,7 +62,6 @@
       },
       "identity": "[parameters('identity')]",
       "tags": "[parameters('tags')]",
-      "etag": "[parameters('etag')]"
     }
   },
   "resources": [

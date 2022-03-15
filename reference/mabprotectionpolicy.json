@@ -23,12 +23,6 @@
         "description": "Resource tags."
       }
     },
-    "eTag": {
-      "type": "string",
-      "metadata": {
-        "description": "Optional ETag."
-      }
-    },
     "retentionPolicy": {
       "type": "object",
       "metadata": {
@@ -57,7 +51,6 @@
       "name": "[parameters('name')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tags')]",
-      "eTag": "[parameters('eTag')]",
       "properties": {
         "backupManagementType": "MAB",
         "retentionPolicy": "[parameters('retentionPolicy')]",

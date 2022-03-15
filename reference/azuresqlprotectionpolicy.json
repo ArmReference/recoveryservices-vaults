@@ -24,13 +24,6 @@
         "description": "Resource tags."
       }
     },
-    "eTag": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Optional ETag."
-      }
-    },
     "retentionPolicy": {
       "type": "object",
       "metadata": {
@@ -53,7 +46,6 @@
       "name": "[parameters('name')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tags')]",
-      "eTag": "[parameters('eTag')]",
       "properties": {
         "backupManagementType": "AzureSql",
         "retentionPolicy": "[parameters('retentionPolicy')]"

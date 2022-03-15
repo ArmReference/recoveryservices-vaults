@@ -24,13 +24,6 @@
         "description": "Resource tags."
       }
     },
-    "eTag": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Optional ETag."
-      }
-    },
     "makePolicyConsistent": {
       "type": "bool",
       "metadata": {
@@ -101,7 +94,6 @@
       "name": "[parameters('name')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tags')]",
-      "eTag": "[parameters('eTag')]",
       "properties": {
         "backupManagementType": "AzureWorkload",
         "makePolicyConsistent": "[parameters('makePolicyConsistent')]",

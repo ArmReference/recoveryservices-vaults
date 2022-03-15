@@ -24,13 +24,6 @@
         "description": "Resource tags."
       }
     },
-    "eTag": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Optional ETag."
-      }
-    },
     "fabricName": {
       "type": "string",
       "metadata": {
@@ -66,7 +59,6 @@
       "name": "[parameters('name')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tags')]",
-      "eTag": "[parameters('eTag')]",
       "properties": {
         "backupManagementType": "GenericProtectionPolicy",
         "fabricName": "[parameters('fabricName')]",
