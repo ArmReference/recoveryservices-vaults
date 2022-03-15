@@ -43,7 +43,7 @@ The key uri of the Customer Managed Key
 
 Name | Type | Description
 ---- | ---- | -----------
-sku  | object |
+encryption | object |
 
 ## Snippets
 
