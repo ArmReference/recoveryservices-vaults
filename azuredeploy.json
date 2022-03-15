@@ -131,70 +131,35 @@
    }
   },
   {
-   "name": "BuildAzureVmWorkloadProtectionPolicy",
+   "name": "BuildAzureIaaSVMProtectionPolicy",
    "type": "Microsoft.Resources/deployments",
    "apiVersion": "2021-04-01",
    "dependsOn": [
     "[concat('Microsoft.Resources/deployments/','BuildRecoveryServicesVault')]",
-    "[concat('Microsoft.Resources/deployments/','DefineSubProtectionPolicy')]"
-   ],
-   "properties": {
-    "mode": "Incremental",
-    "templateLink": {
-     "uri": "[concat(variables('templateUri'), '/azurevmworkloadprotectionpolicy.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.4"
-    },
-    "parameters": {
-     "name": {
-      "value": "[concat(reference('BuildRecoveryServicesVault').outputs.vaults.value.name,'/AzureVmWorkloadProtectionPolicy')]"
-     },
-     "makePolicyConsistent": {
-      "value": true
-     },
-     "isCompression": {
-      "value": false
-     },
-     "issqlcompression": {
-      "value": false
-     },
-     "subProtectionPolicy": {
-      "value": "[createArray(reference('DefineSubProtectionPolicy').outputs.subProtectionPolicy.value)]"
-     },
-     "tags": {
-      "value": "[json('{\"TagName\": \"TagValue\"}')]"
-     },
-     "timeZone": {
-      "value": "Eastern Standard Time"
-     },
-     "workLoadType": {
-      "value": "SystemState"
-     }
-    }
-   }
-  },
-  {
-   "name": "DefineSubProtectionPolicy",
-   "type": "Microsoft.Resources/deployments",
-   "apiVersion": "2021-04-01",
-   "dependsOn": [
     "[concat('Microsoft.Resources/deployments/','DefineRetentionPolicy')]",
     "[concat('Microsoft.Resources/deployments/','DefineSchedulePolicy')]"
    ],
    "properties": {
     "mode": "Incremental",
     "templateLink": {
-     "uri": "[concat(variables('templateUri'), '/subprotectionpolicy.json', parameters('SasToken'))]",
+     "uri": "[concat(variables('templateUri'), '/azureiaasvmpolicy.json', parameters('SasToken'))]",
      "contentVersion": "1.0.0.4"
     },
     "parameters": {
-     "policyType": {
-      "value": "Incremental"
+     "name": {
+      "value": "[concat(reference('BuildRecoveryServicesVault').outputs.vaults.value.name,'/AzureIaaSVMProtectionPolicy')]"
      },
      "retentionPolicy": {
       "value": "[reference('DefineRetentionPolicy').outputs.retentionPolicy.value]"
      },
      "schedulePolicy": {
       "value": "[reference('DefineSchedulePolicy').outputs.schedulePolicy.value]"
+     },
+     "tags": {
+      "value": "[json('{\"TagName\": \"TagValue\"}')]"
+     },
+     "timeZone": {
+      "value": "Eastern Standard Time"
      }
     }
    }
@@ -500,7 +465,7 @@
     "variables": {},
     "resources": [
      "[reference('BuildRecoveryServicesVault').outputs.vaults.value]",
-     "[reference('BuildAzureVmWorkloadProtectionPolicy').outputs.backupPolicies.value]"
+     "[reference('BuildAzureIaaSVMProtectionPolicy').outputs.backupPolicies.value]"
     ],
     "outputs": {}
    },

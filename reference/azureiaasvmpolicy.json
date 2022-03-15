@@ -57,6 +57,13 @@
         "description": "Type of backup policy type"
       }
     },
+    "timeZone": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'."
+      }
+    },
     "DependsOn": {
       "type": "array",
       "defaultValue": [],
@@ -82,7 +89,7 @@
         "instantRpRetentionRangeInDays": "[parameters('instantRpRetentionRangeInDays')]",
         "retentionPolicy": "[parameters('retentionPolicy')]",
         "schedulePolicy": "[parameters('schedulePolicy')]",
-        "timeZone": "string"
+        "timeZone": "[parameters('timeZone')]"
       }
     }
   },
