@@ -5,11 +5,11 @@
 Parameter name | Required | Description
 -------------- | -------- | -----------
 schedulePolicyType | Yes      | This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
-scheduleFrequencyInMins | Yes      | Frequency of the log schedule operation of this policy in minutes.
+scheduleFrequencyInMins | No       | Frequency of the log schedule operation of this policy in minutes.
 scheduleRunDays | No       | List of days of week this schedule has to be run.
 scheduleRunFrequency | Yes      | Frequency of the schedule operation of this policy.
 scheduleRunTimes | No       | List of times of day this schedule has to be run.
-scheduleWeeklyFrequency | Yes      | At every number weeks this schedule has to be run.
+scheduleWeeklyFrequency | No       | At every number weeks this schedule has to be run.
 
 ### schedulePolicyType
 
@@ -21,9 +21,11 @@ This property will be used as the discriminator for deciding the specific types 
 
 ### scheduleFrequencyInMins
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Frequency of the log schedule operation of this policy in minutes.
+
+- Default value: `0`
 
 ### scheduleRunDays
 
@@ -47,9 +49,11 @@ List of times of day this schedule has to be run.
 
 ### scheduleWeeklyFrequency
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 At every number weeks this schedule has to be run.
+
+- Default value: `0`
 
 ## Outputs
 

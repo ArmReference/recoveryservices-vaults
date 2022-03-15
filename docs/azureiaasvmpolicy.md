@@ -6,8 +6,8 @@ Parameter name | Required | Description
 -------------- | -------- | -----------
 name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
-tags           | Yes      | Resource tags.
-eTag           | Yes      | Optional ETag.
+tags           | No       | Resource tags.
+eTag           | No       | Optional ETag.
 azureBackupRGNamePrefix | No       | Prefix to apply to a ResourceGroup for backups
 azureBackupRGNameSuffix | No       | Suffix to apply to a ResourceGroup for backups
 instantRpRetentionRangeInDays | No       | Instant RP retention policy range in days
@@ -31,13 +31,13 @@ Resource location.
 
 ### tags
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Resource tags.
 
 ### eTag
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Optional ETag.
 

@@ -6,8 +6,8 @@ Parameter name | Required | Description
 -------------- | -------- | -----------
 name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
-tags           | Yes      | Resource tags.
-eTag           | Yes      | Optional ETag.
+tags           | No       | Resource tags.
+eTag           | No       | Optional ETag.
 timeZone       | No       | TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
 workLoadType   | Yes      | Type of workload for the backup management
 retentionPolicy | Yes      | The retention policy with the details on backup copy retention ranges.
@@ -30,13 +30,13 @@ Resource location.
 
 ### tags
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Resource tags.
 
 ### eTag
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Optional ETag.
 
