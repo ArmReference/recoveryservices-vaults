@@ -1,0 +1,50 @@
+{
+ "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+ "contentVersion": "1.0.0.3",
+ "parameters": {
+   "policyType": {
+     "type": "string",
+     "allowedValues": [
+       "CopyOnlyFull",
+       "Differential",
+       "Full",
+       "Incremental",
+       "Invalid",
+       "Log"
+     ],
+     "metadata": {
+       "description": "Type of backup policy type"
+     }
+   },
+   "retentionPolicy": {
+     "type": "object",
+     "metadata": {
+       "description": "The retention policy with the details on backup copy retention ranges."
+     }
+   },
+   "schedulePolicy": {
+     "type": "object",
+     "metadata": {
+       "description": "The backup schedule specified as part of backup policy."
+     }
+   }
+ },
+ "variables": {
+   "subProtectionPolicy": {
+    "policyType": "[parameters('policyType')]",
+    "retentionPolicy": "[parameters('retentionPolicy')]",
+    "schedulePolicy": "[parameters('schedulePolicy')]"
+   }
+ },
+ "resources": [
+ ],
+ "outputs": {
+   "subProtectionPolicy": {
+     "type": "object",
+     "value": "[variables('subProtectionPolicy')]",
+     "metadata": {
+       "description": "List of sub-protection policies which includes schedule and retention"
+     }
+   }
+ }
+}
