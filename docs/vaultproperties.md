@@ -4,16 +4,18 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-infrastructureEncryption | Yes      | Enabling/Disabling the Double Encryption state
+infrastructureEncryption | No       | Enabling/Disabling the Double Encryption state
 userAssignedIdentity | Yes      | The user assigned identity to be used to grant permissions in case the type of identity used is UserAssigned
-useSystemAssignedIdentity | Yes      | Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field
-keyUri         | Yes      | The key uri of the Customer Managed Key
+useSystemAssignedIdentity | No       | Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field
+keyUri         | No       | The key uri of the Customer Managed Key
 
 ### infrastructureEncryption
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Enabling/Disabling the Double Encryption state
+
+- Default value: `Disabled`
 
 - Allowed values: `Disabled`, `Enabled`
 
@@ -25,13 +27,15 @@ The user assigned identity to be used to grant permissions in case the type of i
 
 ### useSystemAssignedIdentity
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field
 
+- Default value: `True`
+
 ### keyUri
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 The key uri of the Customer Managed Key
 
@@ -54,13 +58,13 @@ sku  | object |
     },
     "parameters": {
         "infrastructureEncryption": {
-            "value": ""
+            "value": "Disabled"
         },
         "userAssignedIdentity": {
             "value": ""
         },
         "useSystemAssignedIdentity": {
-            "value": null
+            "value": true
         },
         "keyUri": {
             "value": ""

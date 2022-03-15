@@ -44,6 +44,8 @@ The sku size.
 
 The sku tier.
 
+- Default value: `Standard`
+
 ## Outputs
 
 Name | Type | Description
@@ -75,7 +77,7 @@ sku  | object | Identifies the unique system identifier for each Azure resource.
             "value": ""
         },
         "tier": {
-            "value": ""
+            "value": "Standard"
         }
     }
 }
