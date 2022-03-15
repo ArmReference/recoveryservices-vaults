@@ -7,7 +7,6 @@ Parameter name | Required | Description
 name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | Yes      | Resource tags.
-eTag           | Yes      | Optional ETag.
 retentionPolicy | Yes      | The retention policy with the details on backup copy retention ranges.
 schedulePolicy | Yes      | The backup schedule specified as part of backup policy.
 DependsOn      | No       | Pass dependencies
@@ -31,12 +30,6 @@ Resource location.
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
 Resource tags.
-
-### eTag
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-Optional ETag.
 
 ### retentionPolicy
 
@@ -82,9 +75,6 @@ backupPolicies | object | Mab container-specific backup policy.
         },
         "tags": {
             "value": {}
-        },
-        "eTag": {
-            "value": ""
         },
         "retentionPolicy": {
             "value": {}

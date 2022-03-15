@@ -7,7 +7,6 @@ Parameter name | Required | Description
 name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | No       | Resource tags.
-eTag           | No       | Optional ETag.
 timeZone       | No       | TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
 workLoadType   | Yes      | Type of workload for the backup management
 retentionPolicy | Yes      | The retention policy with the details on backup copy retention ranges.
@@ -33,12 +32,6 @@ Resource location.
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Resource tags.
-
-### eTag
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Optional ETag.
 
 ### timeZone
 
@@ -98,9 +91,6 @@ backupPolicies | object | AzureStorage backup policy.
         },
         "tags": {
             "value": {}
-        },
-        "eTag": {
-            "value": ""
         },
         "timeZone": {
             "value": ""

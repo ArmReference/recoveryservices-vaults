@@ -6,7 +6,6 @@ Parameter name | Required | Description
 -------------- | -------- | -----------
 name           | Yes      | The name of the recovery services vault.
 location       | No       | Resource location.
-etag           | No       | Optional ETag.
 sku            | Yes      | Identifies the unique system identifier for each Azure resource.
 tags           | No       | Resource tags.
 identity       | No       |
@@ -26,12 +25,6 @@ The name of the recovery services vault.
 Resource location.
 
 - Default value: `[resourceGroup().location]`
-
-### etag
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Optional ETag.
 
 ### sku
 
@@ -86,9 +79,6 @@ vaults | object |
         },
         "location": {
             "value": "[resourceGroup().location]"
-        },
-        "etag": {
-            "value": ""
         },
         "sku": {
             "value": {}

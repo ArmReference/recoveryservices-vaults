@@ -7,7 +7,6 @@ Parameter name | Required | Description
 name           | Yes      | Resource name associated with the resource.
 location       | No       | Resource location.
 tags           | No       | Resource tags.
-eTag           | No       | Optional ETag.
 fabricName     | Yes      | Name of this policy's fabric.
 timeZone       | No       | TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'.
 subProtectionPolicy | Yes      | List of sub-protection policies which includes schedule and retention
@@ -32,12 +31,6 @@ Resource location.
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 Resource tags.
-
-### eTag
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Optional ETag.
 
 ### fabricName
 
@@ -89,9 +82,6 @@ backupPolicies | object | Azure VM (Mercury) workload-specific backup policy.
         },
         "tags": {
             "value": {}
-        },
-        "eTag": {
-            "value": ""
         },
         "fabricName": {
             "value": ""
