@@ -1,17 +1,30 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.3",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.4",
   "parameters": {
     "schedulePolicyType": {
       "type": "string",
       "allowedValues": [
+        "LogSchedulePolicy",
         "SimpleSchedulePolicy",
         "LongTermSchedulePolicy"
-      ]
+      ],
+      "metadata": {
+        "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types."
+      }
+    },
+    "scheduleFrequencyInMins": {
+      "type": "int",
+      "metadata": {
+        "description": "Frequency of the log schedule operation of this policy in minutes."
+      }
     },
     "scheduleRunDays": {
       "type": "array",
-      "defaultValue": []
+      "defaultValue": [],
+      "metadata": {
+        "description": "List of days of week this schedule has to be run."
+      }
     },
     "scheduleRunFrequency": {
       "type": "string",
@@ -21,23 +34,27 @@
         "Weekly"
       ],
       "metadata": {
-        "description": "Defines the frequency interval (daily or weekly) for the schedule policy."
+        "description": "Frequency of the schedule operation of this policy."
       }
     },
     "scheduleRunTimes": {
       "type": "array",
-      "defaultValue": []
+      "defaultValue": [],
+      "metadata": {
+        "description": "List of times of day this schedule has to be run."
+      }
     },
     "scheduleWeeklyFrequency": {
       "type": "int",
       "metadata": {
-        "description": "The number of times per week the schedule runs."
+        "description": "At every number weeks this schedule has to be run."
       }
     }
   },
   "variables": {
-    "comments": {
-      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#simpleschedulepolicy"
+    "LogSchedulePolicy": {
+      "schedulePolicyType": "[parameters('schedulePolicyType')]",
+      "scheduleFrequencyInMins": "[parameters('scheduleFrequencyInMins')]"
     },
     "LongTermSchedulePolicy": {
       "schedulePolicyType": "[parameters('schedulePolicyType')]"
@@ -49,14 +66,17 @@
       "scheduleRunTimes": "[parameters('scheduleRunTimes')]",
       "scheduleWeeklyFrequency": "[parameters('scheduleWeeklyFrequency')]"
     },
-    "schedulePolicy": "[if(equals(parameters('schedulePolicyType'),'LongTermSchedulePolicy'),variables('LongTermSchedulePolicy'),variables('SimpleSchedulePolicy'))]"
+    "schedulePolicy": "[if(equals(parameters('schedulePolicyType'),'LogSchedulePolicy'),variables('LogSchedulePolicy'),if(equals(parameters('schedulePolicyType'),'SimpleSchedulePolicy'),variables('SimpleSchedulePolicy'),variables('LongTermSchedulePolicy')))]"
   },
   "resources": [
   ],
   "outputs": {
     "schedulePolicy": {
       "type": "object",
-      "value": "[variables('schedulePolicy')]"
+      "value": "[variables('schedulePolicy')]",
+      "metadata": {
+        "description": "Backup schedule specified as part of backup policy."
+      }
     }
   }
 }

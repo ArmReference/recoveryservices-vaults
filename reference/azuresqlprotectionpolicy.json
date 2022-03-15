@@ -29,37 +29,10 @@
         "description": "Optional ETag."
       }
     },
-    "azureBackupRGNamePrefix": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Prefix to apply to a ResourceGroup for backups"
-      }
-    },
-    "azureBackupRGNameSuffix": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Suffix to apply to a ResourceGroup for backups"
-      }
-    },
-    "instantRpRetentionRangeInDays": {
-      "type": "int",
-      "defaultValue": 2,
-      "metadata": {
-        "description": "Instant RP retention policy range in days"
-      }
-    },
     "retentionPolicy": {
       "type": "object",
       "metadata": {
-        "description": "Type of backup policy type"
-      }
-    },
-    "schedulePolicy": {
-      "type": "object",
-      "metadata": {
-        "description": "Type of backup policy type"
+        "description": "The retention policy with the details on backup copy retention ranges."
       }
     },
     "DependsOn": {
@@ -80,25 +53,19 @@
       "tags": "[parameters('tags')]",
       "eTag": "[parameters('eTag')]",
       "properties": {
-        "backupManagementType": "AzureIaasVM",
-        "instantRPDetails": {
-          "azureBackupRGNamePrefix": "[parameters('azureBackupRGNamePrefix')]",
-          "azureBackupRGNameSuffix": "[parameters('azureBackupRGNameSuffix')]"
-        },
-        "instantRpRetentionRangeInDays": "[parameters('instantRpRetentionRangeInDays')]",
-        "retentionPolicy": "[parameters('retentionPolicy')]",
-        "schedulePolicy": "[parameters('schedulePolicy')]",
-        "timeZone": "string"
+        "backupManagementType": "AzureSql",
+        "retentionPolicy": "[parameters('retentionPolicy')]"
       }
     }
   },
-  "resources": [],
+  "resources": [
+  ],
   "outputs": {
     "backupPolicies": {
       "type": "object",
       "value": "[variables('backupPolicies')]",
       "metadata": {
-        "description": "IaaS VM workload-specific backup policy."
+        "description": "Azure SQL workload-specific backup policy."
       }
     }
   }

@@ -29,37 +29,16 @@
         "description": "Optional ETag."
       }
     },
-    "azureBackupRGNamePrefix": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Prefix to apply to a ResourceGroup for backups"
-      }
-    },
-    "azureBackupRGNameSuffix": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Suffix to apply to a ResourceGroup for backups"
-      }
-    },
-    "instantRpRetentionRangeInDays": {
-      "type": "int",
-      "defaultValue": 2,
-      "metadata": {
-        "description": "Instant RP retention policy range in days"
-      }
-    },
     "retentionPolicy": {
       "type": "object",
       "metadata": {
-        "description": "Type of backup policy type"
+        "description": "The retention policy with the details on backup copy retention ranges."
       }
     },
     "schedulePolicy": {
       "type": "object",
       "metadata": {
-        "description": "Type of backup policy type"
+        "description": "The backup schedule specified as part of backup policy."
       }
     },
     "DependsOn": {
@@ -80,25 +59,20 @@
       "tags": "[parameters('tags')]",
       "eTag": "[parameters('eTag')]",
       "properties": {
-        "backupManagementType": "AzureIaasVM",
-        "instantRPDetails": {
-          "azureBackupRGNamePrefix": "[parameters('azureBackupRGNamePrefix')]",
-          "azureBackupRGNameSuffix": "[parameters('azureBackupRGNameSuffix')]"
-        },
-        "instantRpRetentionRangeInDays": "[parameters('instantRpRetentionRangeInDays')]",
+        "backupManagementType": "MAB",
         "retentionPolicy": "[parameters('retentionPolicy')]",
         "schedulePolicy": "[parameters('schedulePolicy')]",
-        "timeZone": "string"
       }
     }
   },
-  "resources": [],
+  "resources": [
+  ],
   "outputs": {
     "backupPolicies": {
       "type": "object",
       "value": "[variables('backupPolicies')]",
       "metadata": {
-        "description": "IaaS VM workload-specific backup policy."
+        "description": "Mab container-specific backup policy."
       }
     }
   }

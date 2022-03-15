@@ -29,37 +29,46 @@
         "description": "Optional ETag."
       }
     },
-    "azureBackupRGNamePrefix": {
+    "timeZone": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
-        "description": "Prefix to apply to a ResourceGroup for backups"
+        "description": "TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'."
       }
     },
-    "azureBackupRGNameSuffix": {
+    "workLoadType": {
       "type": "string",
-      "defaultValue": "",
+      "allowedValues": [
+        "AzureFileShare",
+        "AzureSqlDb",
+        "Client",
+        "Exchange",
+        "FileFolder",
+        "GenericDataSource",
+        "Invalid",
+        "SAPAseDatabase",
+        "SAPHanaDatabase",
+        "SQLDB",
+        "SQLDataBase",
+        "Sharepoint",
+        "SystemState",
+        "VM",
+        "VMwareVM"
+      ],
       "metadata": {
-        "description": "Suffix to apply to a ResourceGroup for backups"
-      }
-    },
-    "instantRpRetentionRangeInDays": {
-      "type": "int",
-      "defaultValue": 2,
-      "metadata": {
-        "description": "Instant RP retention policy range in days"
+        "description": "Type of workload for the backup management"
       }
     },
     "retentionPolicy": {
       "type": "object",
       "metadata": {
-        "description": "Type of backup policy type"
+        "description": "The retention policy with the details on backup copy retention ranges."
       }
     },
     "schedulePolicy": {
       "type": "object",
       "metadata": {
-        "description": "Type of backup policy type"
+        "description": "The backup schedule specified as part of backup policy."
       }
     },
     "DependsOn": {
@@ -80,25 +89,22 @@
       "tags": "[parameters('tags')]",
       "eTag": "[parameters('eTag')]",
       "properties": {
-        "backupManagementType": "AzureIaasVM",
-        "instantRPDetails": {
-          "azureBackupRGNamePrefix": "[parameters('azureBackupRGNamePrefix')]",
-          "azureBackupRGNameSuffix": "[parameters('azureBackupRGNameSuffix')]"
-        },
-        "instantRpRetentionRangeInDays": "[parameters('instantRpRetentionRangeInDays')]",
+        "backupManagementType": "AzureStorage",
         "retentionPolicy": "[parameters('retentionPolicy')]",
         "schedulePolicy": "[parameters('schedulePolicy')]",
-        "timeZone": "string"
+        "timeZone": "[parameters('timeZone')]",
+        "workLoadType": "[parameters('workLoadType')]"
       }
     }
   },
-  "resources": [],
+  "resources": [
+  ],
   "outputs": {
     "backupPolicies": {
       "type": "object",
       "value": "[variables('backupPolicies')]",
       "metadata": {
-        "description": "IaaS VM workload-specific backup policy."
+        "description": "AzureStorage backup policy."
       }
     }
   }

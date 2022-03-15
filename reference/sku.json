@@ -1,35 +1,53 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.3",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.4",
   "parameters": {
     "name": {
       "type": "string",
       "defaultValue": "RS0",
       "allowedValues": [
-        "RS0"
+        "RS0",
+        "Standard"
       ],
       "metadata": {
         "description": "The sku name."
       }
     },
+    "capacity": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The sku capacity."
+      }
+    },
+    "family": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The sku family."
+      }
+    },
+    "size": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The sku size."
+      }
+    },
     "tier": {
       "type": "string",
-      "defaultValue": "Standard",
-      "allowedValues": [
-        "Standard"
-      ],
+      "defaultValue": "",
       "metadata": {
         "description": "The sku tier."
       }
     }
   },
   "variables": {
-    "comments": {
-      "definition": "https://docs.microsoft.com/en-us/rest/api/recoveryservices/vaults/createorupdate#sku",
-      "schema": "https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2016-06-01/Microsoft.RecoveryServices.json"
-    },
     "sku": {
       "name": "[parameters('name')]",
+      "capacity": "[parameters('capacity')]",
+      "family": "[parameters('family')]",
+      "size": "[parameters('size')]",
       "tier": "[parameters('tier')]"
     }
   },
@@ -38,7 +56,10 @@
   "outputs": {
     "sku": {
       "type": "object",
-      "value": "[variables('sku')]"
+      "value": "[variables('sku')]",
+      "metadata": {
+        "description": "Identifies the unique system identifier for each Azure resource."
+      }
     }
   }
 }

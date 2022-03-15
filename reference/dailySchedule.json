@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.3",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.4",
   "parameters": {
     "retentionDuration": {
       "type": "object",
@@ -16,9 +16,6 @@
     }
   },
   "variables": {
-    "comments": {
-      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#dailyretentionschedule"
-    },
     "dailySchedule": {
       "retentionTimes": "[parameters('retentionTimes')]",
       "retentionDuration": "[parameters('retentionDuration')]"

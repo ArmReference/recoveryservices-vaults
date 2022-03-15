@@ -1,25 +1,22 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.3",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.4",
   "parameters": {
     "date": {
       "type": "int",
       "metadata": {
-        "description": ""
+        "description": "Date of the month"
       }
     },
     "isLast": {
       "type": "bool",
       "defaultValue": false,
       "metadata": {
-        "description": ""
+        "description": "Whether Date is last date of month"
       }
     }
   },
   "variables": {
-    "comments": {
-      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#dailyretentionformat"
-    },
     "daysOfTheMonth": {
       "date": "[parameters('date')]",
       "isLast": "[parameters('isLast')]"

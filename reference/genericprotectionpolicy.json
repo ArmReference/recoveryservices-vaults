@@ -29,37 +29,23 @@
         "description": "Optional ETag."
       }
     },
-    "azureBackupRGNamePrefix": {
+    "fabricName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of this policy's fabric."
+      }
+    },
+    "timeZone": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
-        "description": "Prefix to apply to a ResourceGroup for backups"
+        "description": "TimeZone optional input as string. For example: TimeZone = 'Pacific Standard Time'."
       }
     },
-    "azureBackupRGNameSuffix": {
-      "type": "string",
-      "defaultValue": "",
+    "subProtectionPolicy": {
+      "type": "array",
       "metadata": {
-        "description": "Suffix to apply to a ResourceGroup for backups"
-      }
-    },
-    "instantRpRetentionRangeInDays": {
-      "type": "int",
-      "defaultValue": 2,
-      "metadata": {
-        "description": "Instant RP retention policy range in days"
-      }
-    },
-    "retentionPolicy": {
-      "type": "object",
-      "metadata": {
-        "description": "Type of backup policy type"
-      }
-    },
-    "schedulePolicy": {
-      "type": "object",
-      "metadata": {
-        "description": "Type of backup policy type"
+        "description": "List of sub-protection policies which includes schedule and retention"
       }
     },
     "DependsOn": {
@@ -80,25 +66,21 @@
       "tags": "[parameters('tags')]",
       "eTag": "[parameters('eTag')]",
       "properties": {
-        "backupManagementType": "AzureIaasVM",
-        "instantRPDetails": {
-          "azureBackupRGNamePrefix": "[parameters('azureBackupRGNamePrefix')]",
-          "azureBackupRGNameSuffix": "[parameters('azureBackupRGNameSuffix')]"
-        },
-        "instantRpRetentionRangeInDays": "[parameters('instantRpRetentionRangeInDays')]",
-        "retentionPolicy": "[parameters('retentionPolicy')]",
-        "schedulePolicy": "[parameters('schedulePolicy')]",
-        "timeZone": "string"
+        "backupManagementType": "GenericProtectionPolicy",
+        "fabricName": "[parameters('fabricName')]",
+        "subProtectionPolicy": "[parameters('subProtectionPolicy')]",
+        "timeZone": "[parameters('timeZone')]"
       }
     }
   },
-  "resources": [],
+  "resources": [
+  ],
   "outputs": {
     "backupPolicies": {
       "type": "object",
       "value": "[variables('backupPolicies')]",
       "metadata": {
-        "description": "IaaS VM workload-specific backup policy."
+        "description": "Azure VM (Mercury) workload-specific backup policy."
       }
     }
   }

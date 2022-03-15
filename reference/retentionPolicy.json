@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.3",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.4",
   "parameters": {
     "dailySchedule": {
       "type": "object",
@@ -49,9 +49,6 @@
     }
   },
   "variables": {
-    "comments": {
-      "definition": "https://docs.microsoft.com/en-us/rest/api/site-recovery/protectionpolicies/createorupdate#longtermretentionpolicy"
-    },
     "LongTermRetentionPolicy": {
       "retentionPolicyType": "[parameters('retentionPolicyType')]",
       "dailySchedule": "[parameters('dailySchedule')]",
@@ -70,7 +67,10 @@
   "outputs": {
     "retentionPolicy": {
       "type": "object",
-      "value": "[variables('retentionPolicy')]"
+      "value": "[variables('retentionPolicy')]",
+      "metadata": {
+        "description": "Retention policy with the details on backup copy retention ranges."
+      }
     }
   }
 }
