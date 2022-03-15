@@ -19,12 +19,14 @@
     },
     "tags": {
       "type": "object",
+      "defaultValue": {},
       "metadata": {
         "description": "Resource tags."
       }
     },
     "eTag": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Optional ETag."
       }

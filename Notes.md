@@ -40,3 +40,7 @@ I think any other key/value pairs passed in will be ignored but I've not tested 
 ### SchedulePolicy
 
 It feels as though LongtermSchedulePolicy is missing all the things, for example the Log policy has two items, the type and frequency. The Simple schedule has the type, days it runs, times it runs and a frequency. Looking at Longterm it just has a string type, 'LongTermSchedulePolicy'.
+
+## eTag
+
+I believe that this property is not set at deployment time, yet it's listed in the arm template reference as well as the API and schema.

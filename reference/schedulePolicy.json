@@ -15,6 +15,7 @@
     },
     "scheduleFrequencyInMins": {
       "type": "int",
+      "defaultValue": 0,
       "metadata": {
         "description": "Frequency of the log schedule operation of this policy in minutes."
       }
@@ -46,6 +47,7 @@
     },
     "scheduleWeeklyFrequency": {
       "type": "int",
+      "defaultValue": 0,
       "metadata": {
         "description": "At every number weeks this schedule has to be run."
       }
