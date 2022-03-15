@@ -121,7 +121,7 @@
      "VaultProperties": {
       "value": "[reference('DefineVaultProperties').outputs.encryption.value]"
      },
-     "identity":{
+     "identity": {
       "value": "[reference('DefineIdentity').outputs.identity.value]"
      },
      "tags": {
@@ -160,6 +160,134 @@
      },
      "timeZone": {
       "value": "Eastern Standard Time"
+     }
+    }
+   }
+  },
+  {
+   "name": "BuildAzureSqlProtectionPolicy",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','BuildRecoveryServicesVault')]",
+    "[concat('Microsoft.Resources/deployments/','DefineSubProtectionPolicy')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/azuresqlprotectionpolicy.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.4"
+    },
+    "parameters": {
+     "name": {
+      "value": "[concat(reference('BuildRecoveryServicesVault').outputs.vaults.value.name,'/AzureSqlProtectionPolicy')]"
+     },
+     "tags": {
+      "value": "[json('{\"TagName\": \"TagValue\"}')]"
+     },
+     "retentionPolicy": {
+      "value": "[reference('DefineRetentionPolicy').outputs.retentionPolicy.value]"
+     }
+    }
+   }
+  },
+  {
+   "name": "BuildGenericProtectionPolicy",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','BuildRecoveryServicesVault')]",
+    "[concat('Microsoft.Resources/deployments/','DefineSubProtectionPolicy')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/genericprotectionpolicy.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.4"
+    },
+    "parameters": {
+     "name": {
+      "value": "[concat(reference('BuildRecoveryServicesVault').outputs.vaults.value.name,'/GenericProtectionPolicy')]"
+     },
+     "fabricName": {
+      "value": "something"
+     },
+     "subProtectionPolicy": {
+      "value": "[createArray(reference('DefineSubProtectionPolicy').outputs.subProtectionPolicy.value)]"
+     },
+     "tags": {
+      "value": "[json('{\"TagName\": \"TagValue\"}')]"
+     },
+     "timeZone": {
+      "value": "Eastern Standard Time"
+     }
+    }
+   }
+  },
+  {
+   "name": "BuildAzureVmWorkloadProtectionPolicy",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','BuildRecoveryServicesVault')]",
+    "[concat('Microsoft.Resources/deployments/','DefineSubProtectionPolicy')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/azurevmworkloadprotectionpolicy.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.4"
+    },
+    "parameters": {
+     "name": {
+      "value": "[concat(reference('BuildRecoveryServicesVault').outputs.vaults.value.name,'/AzureVmWorkloadProtectionPolicy')]"
+     },
+     "makePolicyConsistent": {
+      "value": true
+     },
+     "isCompression": {
+      "value": false
+     },
+     "issqlcompression": {
+      "value": false
+     },
+     "subProtectionPolicy": {
+      "value": "[createArray(reference('DefineSubProtectionPolicy').outputs.subProtectionPolicy.value)]"
+     },
+     "tags": {
+      "value": "[json('{\"TagName\": \"TagValue\"}')]"
+     },
+     "timeZone": {
+      "value": "Eastern Standard Time"
+     },
+     "workLoadType": {
+      "value": "SystemState"
+     }
+    }
+   }
+  },  {
+   "name": "DefineSubProtectionPolicy",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2021-04-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','DefineRetentionPolicy')]",
+    "[concat('Microsoft.Resources/deployments/','DefineSchedulePolicy')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/subprotectionpolicy.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.4"
+    },
+    "parameters": {
+     "policyType": {
+      "value": "Incremental"
+     },
+     "retentionPolicy": {
+      "value": "[reference('DefineRetentionPolicy').outputs.retentionPolicy.value]"
+     },
+     "schedulePolicy": {
+      "value": "[reference('DefineSchedulePolicy').outputs.schedulePolicy.value]"
      }
     }
    }
@@ -465,7 +593,10 @@
     "variables": {},
     "resources": [
      "[reference('BuildRecoveryServicesVault').outputs.vaults.value]",
-     "[reference('BuildAzureIaaSVMProtectionPolicy').outputs.backupPolicies.value]"
+     "[reference('BuildAzureIaaSVMProtectionPolicy').outputs.backupPolicies.value]",
+     "[reference('BuildAzureSqlProtectionPolicy').outputs.backupPolicies.value]",
+     "[reference('BuildGenericProtectionPolicy').outputs.backupPolicies.value]",
+     "[reference('BuildAzureVmWorkloadProtectionPolicy').outputs.backupPolicies.value]"
     ],
     "outputs": {}
    },
