@@ -451,7 +451,7 @@
     "variables": {},
     "resources": [
      "[reference('BuildRecoveryServicesVault').outputs.vaults.value]",
-     "[reference('BuildVmProtectionPolicy').outputs.protectionPolicy.value]"
+     "[reference('BuildAzureVmWorkloadProtectionPolicy').outputs.backupPolicies.value]"
     ],
     "outputs": {}
    },
