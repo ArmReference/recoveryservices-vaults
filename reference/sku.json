@@ -36,7 +36,7 @@
     },
     "tier": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "Standard",
       "metadata": {
         "description": "The sku tier."
       }
