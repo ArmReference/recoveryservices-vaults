@@ -5,7 +5,7 @@
 Parameter name | Required | Description
 -------------- | -------- | -----------
 infrastructureEncryption | No       | Enabling/Disabling the Double Encryption state
-userAssignedIdentity | Yes      | The user assigned identity to be used to grant permissions in case the type of identity used is UserAssigned
+userAssignedIdentity | No       | The user assigned identity to be used to grant permissions in case the type of identity used is UserAssigned
 useSystemAssignedIdentity | No       | Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field
 keyUri         | No       | The key uri of the Customer Managed Key
 
@@ -21,7 +21,7 @@ Enabling/Disabling the Double Encryption state
 
 ### userAssignedIdentity
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 The user assigned identity to be used to grant permissions in case the type of identity used is UserAssigned
 
