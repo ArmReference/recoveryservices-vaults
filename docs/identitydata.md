@@ -4,14 +4,16 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-type           | Yes      | The type of managed identity used. 
+type           | No       | The type of managed identity used. 
 userAssignedIdentities | No       | The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids i
 
 ### type
 
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
 The type of managed identity used. 
+
+- Default value: `None`
 
 - Allowed values: `None`, `SystemAssigned`, `UserAssigned`
 
@@ -40,7 +42,7 @@ identity | object |
     },
     "parameters": {
         "type": {
-            "value": ""
+            "value": "None"
         },
         "userAssignedIdentities": {
             "value": {}
