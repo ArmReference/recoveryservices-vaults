@@ -135,17 +135,11 @@
      "policyType": {
       "value": "Incremental"
      },
-     "scheduleRunDays": {
-      "value": []
+     "retentionPolicy": {
+      "value": "[reference('DefineRetentionPolicy').outputs.retentionPolicy.value]"
      },
-     "scheduleRunFrequency": {
-      "value": "Daily"
-     },
-     "scheduleRunTimes": {
-      "value": "[createArray('02:30')]"
-     },
-     "scheduleWeeklyFrequency": {
-      "value": 0
+     "schedulePolicy": {
+      "value": "[reference('DefineSchedulePolicy').outputs.schedulePolicy.value]"
      }
     }
    }
