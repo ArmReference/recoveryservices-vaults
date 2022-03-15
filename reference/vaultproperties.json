@@ -4,6 +4,7 @@
  "parameters": {
   "infrastructureEncryption": {
    "type": "string",
+   "defaultValue": "Disabled",
    "allowedValues": [
     "Disabled",
     "Enabled"
@@ -20,12 +21,14 @@
   },
   "useSystemAssignedIdentity": {
    "type": "bool",
+   "defaultValue": true,
    "metadata": {
     "description": "Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field"
    }
   },
   "keyUri": {
    "type": "string",
+   "defaultValue": "",
    "metadata": {
     "description": "The key uri of the Customer Managed Key"
    }
